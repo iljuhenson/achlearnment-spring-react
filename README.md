@@ -6,7 +6,7 @@
   Achlearnment
 </h1>
 
-<h4 align="center">Learn languages the fun way!:uk::jp::poland:</h4>
+<h4 align="center">Learn languages the fun way! :uk: :jp: :poland:</h4>
 
 <p align="center">
   <a href="#overview">Overview</a> •
