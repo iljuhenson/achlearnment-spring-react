@@ -47,17 +47,9 @@ This section is not ready yet :pensive:
 
 This was built with the help of the following technologies:
 
-### Backend
-
-[![OpenJDK](https://img.shields.io/badge/java-black?style=for-the-badge&logo=OpenJDK)](https://openjdk.org/) [![Spring](https://img.shields.io/badge/spring-grey?style=for-the-badge&logo=Spring)](https://spring.io/) [![Docker](https://img.shields.io/badge/docker-black?style=for-the-badge&logo=docker)](https://www.docker.com/) [![MariaDB](https://img.shields.io/badge/mariadb-blue?style=for-the-badge&logo=MariaDB)](https://mariadb.org/)
-
-### Frontend
-
-[![React](https://img.shields.io/badge/React-black?style=for-the-badge&logo=React)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-black?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-
-### Additional software
-
-[![Intelij Idea](https://img.shields.io/badge/Intelij%20Idea-grey?style=for-the-badge&logo=intellijidea)](https://www.jetbrains.com/idea/) [![DBeaver](https://img.shields.io/badge/DBeaver-brown?style=for-the-badge&logo=dbeaver)](https://dbeaver.io/)
+| Backend | Frontend | Additional software |
+|-----|----------|---------------------|
+|[![OpenJDK](https://img.shields.io/badge/java-black?style=for-the-badge&logo=OpenJDK)](https://openjdk.org/)<br/>[![Spring](https://img.shields.io/badge/spring-grey?style=for-the-badge&logo=Spring)](https://spring.io/)<br/> [![Docker](https://img.shields.io/badge/docker-black?style=for-the-badge&logo=docker)](https://www.docker.com/)<br/>[![MariaDB](https://img.shields.io/badge/mariadb-blue?style=for-the-badge&logo=MariaDB)](https://mariadb.org/)|[![React](https://img.shields.io/badge/React-black?style=for-the-badge&logo=React)](https://react.dev/)<br/>[![TypeScript](https://img.shields.io/badge/TypeScript-black?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)|[![Intelij Idea](https://img.shields.io/badge/Intelij%20Idea-grey?style=for-the-badge&logo=intellijidea)](https://www.jetbrains.com/idea/)<br/>[![DBeaver](https://img.shields.io/badge/DBeaver-brown?style=for-the-badge&logo=dbeaver)](https://dbeaver.io/)|
 
 ## <a name="dev-process"></a>:hammer_and_wrench: Development process
 
