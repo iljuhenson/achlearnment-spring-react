@@ -5,7 +5,7 @@
   Achlearnment
 </h1>
 
-<h4 align="center">Learn languages the fun way! :uk: :jp: :poland:</h4>
+<h4 align="center">Learn foreign languages the fun way! :uk: :jp: :poland:</h4>
 
 <p align="center">
   <a href="#overview">Overview</a> •
@@ -26,7 +26,7 @@ This was built with the help of the following technologies:
 
 ## <a name="overview"></a>:mag_right: Overview
 
-This app is designed to help users learn languages in an engaging and interactive manner. By providing daily tasks
+This app is designed to help users learn foreign languages in an engaging and interactive manner. By providing daily tasks
 generated randomly, users can continuously improve their language skills while staying motivated by will of wanting to
 buy new items in the shop.
 
