@@ -1,5 +1,6 @@
 -- achlearnment.task_type definition
 
+
 CREATE TABLE `task_type` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `type` varchar(100) NOT NULL,

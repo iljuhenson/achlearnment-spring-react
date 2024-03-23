@@ -13,9 +13,13 @@ services:
       - .:/app
 
   db:
-    image: "mariadb:lts-jammy"
+    build:
+      context: .
+      dockerfile: ./DBDOCKERFILE
     expose:
       - 3306
+    ports:
+      - "3456:3306"
     volumes:
       - data:/var/lib/mysql
     env_file:

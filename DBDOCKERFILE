@@ -1,0 +1,5 @@
+FROM mariadb:lts-jammy
+
+COPY ./sql/schema.sql /docker-entrypoint-initdb.d/
+
+#./sql/entrypoint.sh ./dev.env
