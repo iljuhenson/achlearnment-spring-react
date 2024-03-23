@@ -24,7 +24,6 @@ CREATE TABLE `shop_item` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `name` varchar(100) NOT NULL,
                              `price` int(11) NOT NULL,
-                             `possession_id` int(11) NOT NULL,
                              `description` text DEFAULT NULL,
                              `function` varchar(100) NOT NULL,
                              PRIMARY KEY (`id`)
