@@ -1,4 +1,4 @@
-package com.iljuhenson.achlearnment.controller.DO;
+package com.iljuhenson.achlearnment.service.DO;
 
 public class RegisterRequestDO {
     private String email;

@@ -1,5 +1,6 @@
 package com.iljuhenson.achlearnment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iljuhenson.achlearnment.entity.enums.ShopItemFunctionEnum;
 import jakarta.persistence.*;
 

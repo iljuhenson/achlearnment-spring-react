@@ -1,8 +1,8 @@
 package com.iljuhenson.achlearnment.controller;
 
-import com.iljuhenson.achlearnment.controller.DO.AuthenticationRequestDO;
-import com.iljuhenson.achlearnment.controller.DO.AuthenticationResponseDO;
-import com.iljuhenson.achlearnment.controller.DO.RegisterRequestDO;
+import com.iljuhenson.achlearnment.service.DO.AuthenticationRequestDO;
+import com.iljuhenson.achlearnment.service.DO.AuthenticationResponseDO;
+import com.iljuhenson.achlearnment.service.DO.RegisterRequestDO;
 import com.iljuhenson.achlearnment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

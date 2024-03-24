@@ -50,6 +50,20 @@ public class User implements UserDetails {
     public User() {
     }
 
+
+    public void buyShopItem(ShopItem item) {
+        balance -= item.getPrice();
+        shopItems.add(item);
+    }
+
+    public boolean hasItemOfId(int id) {
+        return !shopItems
+                .stream()
+                .filter(item -> item.getId() == id)
+                .toList()
+                .isEmpty();
+    }
+
     public String getEmail() {
         return email;
     }

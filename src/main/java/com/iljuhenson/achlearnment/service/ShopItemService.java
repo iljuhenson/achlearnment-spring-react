@@ -1,14 +1,18 @@
 package com.iljuhenson.achlearnment.service;
 
 import com.iljuhenson.achlearnment.entity.ShopItem;
+import com.iljuhenson.achlearnment.entity.User;
+import com.iljuhenson.achlearnment.service.DO.ShopItemDO;
+import com.iljuhenson.achlearnment.service.exception.ShopItemException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 
 public interface ShopItemService {
-    List<ShopItem> findAll();
-    List<ShopItem> findAllUsersItems();
-    void buyItem(int itemId);
+    List<ShopItemDO> findAll();
+    List<ShopItemDO> findAllUsersItems(User user);
+    void buyItem(User user, int itemId) throws ShopItemException;
     void listAllUsersPerks();
 }

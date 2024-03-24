@@ -1,8 +1,8 @@
 package com.iljuhenson.achlearnment.service;
 
-import com.iljuhenson.achlearnment.controller.DO.AuthenticationRequestDO;
-import com.iljuhenson.achlearnment.controller.DO.AuthenticationResponseDO;
-import com.iljuhenson.achlearnment.controller.DO.RegisterRequestDO;
+import com.iljuhenson.achlearnment.service.DO.AuthenticationRequestDO;
+import com.iljuhenson.achlearnment.service.DO.AuthenticationResponseDO;
+import com.iljuhenson.achlearnment.service.DO.RegisterRequestDO;
 
 public interface UserService {
     AuthenticationResponseDO register(RegisterRequestDO request);
