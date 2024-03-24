@@ -1,14 +1,3 @@
--- achlearnment.task_type definition
-
-
-CREATE TABLE `task_type` (
-                             `id` int(11) NOT NULL AUTO_INCREMENT,
-                             `type` varchar(100) NOT NULL,
-                             `pay` int(11) NOT NULL,
-                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 -- achlearnment.fill_task_part definition
 
 CREATE TABLE `fill_task_part` (
@@ -30,13 +19,34 @@ CREATE TABLE `shop_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+-- achlearnment.task_type definition
+
+CREATE TABLE `task_type` (
+                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                             `type` varchar(100) NOT NULL,
+                             `pay` int(11) NOT NULL,
+                             PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 -- achlearnment.`user` definition
 
 CREATE TABLE `user` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,
                         `balance` int(11) DEFAULT 0,
-                        `tasks_id` int(11) DEFAULT NULL,
-                        PRIMARY KEY (`id`)
+                        `email` varchar(100) NOT NULL,
+                        `password` varchar(100) NOT NULL,
+                        PRIMARY KEY (`id`),
+                        UNIQUE KEY `user_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- achlearnment.authority definition
+
+CREATE TABLE `authority` (
+                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                             `name` varchar(100) NOT NULL,
+                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -49,18 +59,6 @@ CREATE TABLE `main_task_part` (
                                   PRIMARY KEY (`id`),
                                   KEY `main_task_part_task_type_FK` (`task_type_id`),
                                   CONSTRAINT `main_task_part_task_type_FK` FOREIGN KEY (`task_type_id`) REFERENCES `task_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
--- achlearnment.user_activity definition
-
-CREATE TABLE `user_activity` (
-                                 `id` int(11) NOT NULL AUTO_INCREMENT,
-                                 `day` date NOT NULL,
-                                 `user_id` int(11) NOT NULL,
-                                 PRIMARY KEY (`id`),
-                                 KEY `user_activity_user_FK` (`user_id`),
-                                 CONSTRAINT `user_activity_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -81,6 +79,18 @@ CREATE TABLE `task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+-- achlearnment.user_activity definition
+
+CREATE TABLE `user_activity` (
+                                 `id` int(11) NOT NULL AUTO_INCREMENT,
+                                 `day` date NOT NULL,
+                                 `user_id` int(11) NOT NULL,
+                                 PRIMARY KEY (`id`),
+                                 KEY `user_activity_user_FK` (`user_id`),
+                                 CONSTRAINT `user_activity_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 -- achlearnment.user_shop_item definition
 
 CREATE TABLE `user_shop_item` (
@@ -90,4 +100,16 @@ CREATE TABLE `user_shop_item` (
                                   KEY `user_shop_item_shop_item_FK` (`shop_item_id`),
                                   CONSTRAINT `user_shop_item_shop_item_FK` FOREIGN KEY (`shop_item_id`) REFERENCES `shop_item` (`id`),
                                   CONSTRAINT `user_shop_item_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- achlearnment.user_authority definition
+
+CREATE TABLE `user_authority` (
+                                  `user_id` int(11) NOT NULL,
+                                  `authority_id` int(11) NOT NULL,
+                                  PRIMARY KEY (`user_id`,`authority_id`),
+                                  KEY `user_authority_authority_FK` (`authority_id`),
+                                  CONSTRAINT `user_authority_authority_FK` FOREIGN KEY (`authority_id`) REFERENCES `authority` (`id`),
+                                  CONSTRAINT `user_authority_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

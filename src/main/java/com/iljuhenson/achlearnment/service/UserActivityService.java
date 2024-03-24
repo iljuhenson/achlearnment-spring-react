@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserActivityService {
     List<UserActivity> findAllUserActivities();
+    boolean addTodayActivity();
 }

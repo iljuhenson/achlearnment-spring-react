@@ -15,10 +15,10 @@ public class MainTaskPart {
     @Column(name = "text")
     private String text;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "mainTaskPart")
     private Set<Task> task;
     @ManyToOne
-    @JoinColumn(name = "taskType", nullable = false)
+    @JoinColumn(name = "task_type_id", nullable = false)
     private TaskType taskType;
 
     public MainTaskPart(String text) {

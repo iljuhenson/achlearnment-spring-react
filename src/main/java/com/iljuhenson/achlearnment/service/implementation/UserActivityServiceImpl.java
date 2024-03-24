@@ -12,4 +12,9 @@ public class UserActivityServiceImpl implements UserActivityService {
     public List<UserActivity> findAllUserActivities() {
         return null;
     }
+
+    @Override
+    public boolean addTodayActivity() {
+        return false;
+    }
 }

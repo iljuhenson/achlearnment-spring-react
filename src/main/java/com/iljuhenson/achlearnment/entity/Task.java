@@ -11,15 +11,15 @@ public class Task {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "fill_task_part_id", nullable = false)
     private FillTaskPart fillTaskPart;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "main_task_part_id", nullable = false)
     private MainTaskPart mainTaskPart;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Task() {
