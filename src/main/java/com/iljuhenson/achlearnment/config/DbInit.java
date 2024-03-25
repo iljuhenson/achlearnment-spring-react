@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class DbInit {
     private final AuthorityRepository authorityRepository;
 
+
     @Autowired
     public DbInit(AuthorityRepository authorityRepository) {
         this.authorityRepository = authorityRepository;
@@ -20,7 +21,7 @@ public class DbInit {
     private void init() {
         AuthorityEnum[] authorities = AuthorityEnum.values();
         for(AuthorityEnum authority : authorities) {
-            if(!authorityRepository.findAuthorityByName(authority).isPresent()) {
+            if(authorityRepository.findAuthorityByName(authority).isEmpty()) {
                 Authority authorityDb = new Authority(authority);
                 authorityRepository.save(authorityDb);
             }

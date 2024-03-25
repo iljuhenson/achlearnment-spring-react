@@ -33,6 +33,7 @@ CREATE TABLE `shop_item` (
 CREATE TABLE `task_type` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `type` varchar(100) NOT NULL,
+                             `task_duration` int(11) NOT NULL,
                              `pay` int(11) NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -114,3 +115,8 @@ CREATE TABLE `user_shop_item` (
                                   CONSTRAINT `user_shop_item_shop_item_FK` FOREIGN KEY (`shop_item_id`) REFERENCES `shop_item` (`id`),
                                   CONSTRAINT `user_shop_item_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO task_type (`type`, pay, task_duration)
+VALUES ('EASY', 5, 5),
+       ('MEDIUM', 10, 10),
+       ('HARD', 20, 20);
