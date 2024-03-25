@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private Integer id;
 
     @Column(name = "balance")
-    private Integer balance;
+    private Integer balance = 0;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Set<UserActivity> userActivities;

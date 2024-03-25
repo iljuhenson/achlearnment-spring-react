@@ -42,7 +42,7 @@ CREATE TABLE `task_type` (
 
 CREATE TABLE `user` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,
-                        `balance` int(11) DEFAULT 0,
+                        `balance` int(11) NOT NULL DEFAULT 0,
                         `email` varchar(100) NOT NULL,
                         `password` varchar(100) NOT NULL,
                         PRIMARY KEY (`id`),
