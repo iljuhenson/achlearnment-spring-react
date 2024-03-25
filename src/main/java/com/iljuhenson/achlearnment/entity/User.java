@@ -5,11 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -22,7 +22,7 @@ public class User implements UserDetails {
     @Column(name = "balance")
     private Integer balance;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Set<UserActivity> userActivities;
 
     @OneToMany(mappedBy = "user")
@@ -167,5 +167,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean hasTodayActivity() {
+        return userActivities.stream().anyMatch(activity -> activity.getDay().equals(LocalDate.now()));
+    }
+
+    public int calculateAmountOfTasks() {
+        // TODO: calculate task amount based on the applied shop items.
+        return 5;
+    }
+
+    public void clearTasks() {
+        tasks = null;
     }
 }

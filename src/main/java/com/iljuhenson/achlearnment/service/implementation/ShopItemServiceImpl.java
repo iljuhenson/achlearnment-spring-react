@@ -6,6 +6,7 @@ import com.iljuhenson.achlearnment.repository.ShopItemRepository;
 import com.iljuhenson.achlearnment.repository.UserRepository;
 import com.iljuhenson.achlearnment.service.DO.ShopItemDO;
 import com.iljuhenson.achlearnment.service.ShopItemService;
+import com.iljuhenson.achlearnment.service.UserService;
 import com.iljuhenson.achlearnment.service.exception.ShopItemException;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,11 @@ import java.util.stream.Collectors;
 @Service
 public class ShopItemServiceImpl implements ShopItemService {
     private ShopItemRepository shopItemRepository;
-    private UserRepository userRepository;
+    private UserService userService;
 
-    public ShopItemServiceImpl(ShopItemRepository shopItemRepository, UserRepository userRepository) {
+    public ShopItemServiceImpl(ShopItemRepository shopItemRepository, UserService userService) {
         this.shopItemRepository = shopItemRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class ShopItemServiceImpl implements ShopItemService {
 
         // if everything is okay, then buy the item
         user.buyShopItem(item);
-        userRepository.save(user);
+        userService.save(user);
     }
 
     @Override

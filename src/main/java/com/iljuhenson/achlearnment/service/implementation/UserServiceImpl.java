@@ -54,4 +54,9 @@ public class UserServiceImpl implements UserService {
         String token = jwtService.generateToken(user);
         return new AuthenticationResponseDO(token);
     }
+
+    @Override
+    public void save(User user) {
+        userRepository.saveAndFlush(user);
+    }
 }
