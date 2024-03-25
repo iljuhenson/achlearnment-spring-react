@@ -17,9 +17,6 @@ public class MainTaskPart {
 
     @OneToMany(mappedBy = "mainTaskPart")
     private Set<Task> task;
-    @ManyToOne
-    @JoinColumn(name = "task_type_id", nullable = false)
-    private TaskType taskType;
 
     public MainTaskPart(String text) {
         this.text = text;
@@ -34,7 +31,6 @@ public class MainTaskPart {
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", task=" + task +
-                ", taskType=" + taskType +
                 '}';
     }
 

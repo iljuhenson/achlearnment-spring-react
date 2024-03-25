@@ -11,7 +11,7 @@ public class Task {
     private Integer id;
 
     @Column(name = "is_completed")
-    private Boolean is_completed;
+    private Boolean isCompleted;
 
     @ManyToOne
     @JoinColumn(name = "fill_task_part_id", nullable = false)
@@ -22,26 +22,45 @@ public class Task {
     private MainTaskPart mainTaskPart;
 
     @ManyToOne
+    @JoinColumn(name = "task_type_id", nullable = false)
+    private TaskType taskType;
+
+
+
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
 
     @Override
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", is_completed=" + is_completed +
+                ", isCompleted=" + isCompleted +
                 ", fillTaskPart=" + fillTaskPart +
                 ", mainTaskPart=" + mainTaskPart +
+                ", taskType=" + taskType +
                 ", user=" + user +
                 '}';
     }
 
-    public Boolean getIs_completed() {
-        return is_completed;
+    public Boolean getCompleted() {
+        return isCompleted;
     }
 
-    public void setIs_completed(Boolean is_completed) {
-        this.is_completed = is_completed;
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
+
+    public Task(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public Task() {

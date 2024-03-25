@@ -3,7 +3,8 @@
 CREATE TABLE `authority` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `name` varchar(100) NOT NULL,
-                             PRIMARY KEY (`id`)
+                             PRIMARY KEY (`id`),
+                             UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -12,6 +13,15 @@ CREATE TABLE `authority` (
 CREATE TABLE `fill_task_part` (
                                   `id` int(11) NOT NULL AUTO_INCREMENT,
                                   `word` varchar(100) NOT NULL,
+                                  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- achlearnment.main_task_part definition
+
+CREATE TABLE `main_task_part` (
+                                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                                  `text` varchar(100) NOT NULL,
                                   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -33,8 +43,8 @@ CREATE TABLE `shop_item` (
 CREATE TABLE `task_type` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `type` varchar(100) NOT NULL,
-                             `task_duration` int(11) NOT NULL,
                              `pay` int(11) NOT NULL,
+                             `duration` int(11) NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -51,18 +61,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
--- achlearnment.main_task_part definition
-
-CREATE TABLE `main_task_part` (
-                                  `id` int(11) NOT NULL AUTO_INCREMENT,
-                                  `text` varchar(100) NOT NULL,
-                                  `task_type_id` int(11) NOT NULL,
-                                  PRIMARY KEY (`id`),
-                                  KEY `main_task_part_task_type_FK` (`task_type_id`),
-                                  CONSTRAINT `main_task_part_task_type_FK` FOREIGN KEY (`task_type_id`) REFERENCES `task_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 -- achlearnment.task definition
 
 CREATE TABLE `task` (
@@ -70,13 +68,16 @@ CREATE TABLE `task` (
                         `main_task_part_id` int(11) NOT NULL,
                         `fill_task_part_id` int(11) NOT NULL,
                         `user_id` int(11) NOT NULL,
+                        `task_type_id` int(11) NOT NULL,
                         `is_completed` tinyint(1) NOT NULL DEFAULT 0,
                         PRIMARY KEY (`id`),
                         KEY `task_main_task_part_FK` (`main_task_part_id`),
                         KEY `task_fill_task_part_FK` (`fill_task_part_id`),
                         KEY `task_user_FK` (`user_id`),
+                        KEY `task_task_type_FK` (`task_type_id`),
                         CONSTRAINT `task_fill_task_part_FK` FOREIGN KEY (`fill_task_part_id`) REFERENCES `fill_task_part` (`id`),
                         CONSTRAINT `task_main_task_part_FK` FOREIGN KEY (`main_task_part_id`) REFERENCES `main_task_part` (`id`),
+                        CONSTRAINT `task_task_type_FK` FOREIGN KEY (`task_type_id`) REFERENCES `task_type` (`id`),
                         CONSTRAINT `task_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -116,7 +117,10 @@ CREATE TABLE `user_shop_item` (
                                   CONSTRAINT `user_shop_item_user_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO task_type (`type`, pay, task_duration)
+-- inserting default data
+
+INSERT INTO task_type (`type`, pay, duration)
 VALUES ('EASY', 5, 5),
        ('MEDIUM', 10, 10),
        ('HARD', 20, 20);
+

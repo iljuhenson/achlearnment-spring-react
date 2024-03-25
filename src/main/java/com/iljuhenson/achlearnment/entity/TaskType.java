@@ -20,15 +20,13 @@ public class TaskType {
     @Column(name = "pay")
     private Integer pay;
 
+    @Column(name = "duration")
+    private Integer duration;
+
     @OneToMany(mappedBy = "taskType")
-    private Set<MainTaskPart> mainTaskParts;
+    private Set<Task> tasks;
 
     public TaskType() {
-    }
-
-    public TaskType(TaskTypeEnum type, Integer pay) {
-        this.type = type;
-        this.pay = pay;
     }
 
     public Integer getId() {
@@ -55,12 +53,20 @@ public class TaskType {
         this.pay = pay;
     }
 
-    public Set<MainTaskPart> getMainTaskParts() {
-        return mainTaskParts;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public void setMainTaskParts(Set<MainTaskPart> mainTaskParts) {
-        this.mainTaskParts = mainTaskParts;
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
@@ -69,7 +75,13 @@ public class TaskType {
                 "id=" + id +
                 ", type=" + type +
                 ", pay=" + pay +
-                ", mainTaskParts=" + mainTaskParts +
+                ", duration=" + duration +
+                ", tasks=" + tasks +
                 '}';
+    }
+
+    public TaskType(Integer pay, Integer duration) {
+        this.pay = pay;
+        this.duration = duration;
     }
 }
