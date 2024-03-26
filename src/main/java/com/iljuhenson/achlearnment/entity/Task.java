@@ -11,7 +11,14 @@ public class Task {
     private Integer id;
 
     @Column(name = "is_completed")
-    private Boolean isCompleted;
+    private Boolean isCompleted = false;
+
+    public Task(FillTaskPart fillTaskPart, MainTaskPart mainTaskPart, TaskType taskType, User user) {
+        this.fillTaskPart = fillTaskPart;
+        this.mainTaskPart = mainTaskPart;
+        this.taskType = taskType;
+        this.user = user;
+    }
 
     @ManyToOne
     @JoinColumn(name = "fill_task_part_id", nullable = false)
@@ -57,10 +64,6 @@ public class Task {
 
     public void setCompleted(Boolean completed) {
         isCompleted = completed;
-    }
-
-    public Task(Boolean isCompleted) {
-        this.isCompleted = isCompleted;
     }
 
     public Task() {

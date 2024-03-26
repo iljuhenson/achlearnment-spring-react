@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Set<UserActivity> userActivities;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     private Set<Task> tasks;
 
     @Column(name = "email")
