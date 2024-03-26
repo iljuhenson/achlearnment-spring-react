@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="./github-related/achlearnment-header.png" alt="Markdownify">
+  <img src="./github-related/achlearnment-header.png" alt="Achlearnment">
   <br>
   Achlearnment
 </h1>
@@ -57,15 +57,34 @@ $ docker-compose up
 
 ## <a name="screenshots"></a>:camera: Screenshots
 
-This section is not ready yet :pensive:
-
-## <a name="dev-process"></a>:hammer_and_wrench: Development process
-
-This section is not ready yet :pensive:
+This section is under construction :construction:
 
 ## <a name="app-architecture"></a>:triangular_ruler: Application architecture
 
-This section is not ready yet :pensive:
+### :floppy_disk: Database
+
+This schema fully incapsulates the data representation logic behind achlearnment project:
+
+1. `main_task_part`, `fill_task_part` and `task_type` tables allow to compose a random task which would further be joined and assigned to user inside `task` table.
+
+1. `user_activity` stores dates when user was active. Graphic representation of this table is website's activity calendar. Application's business logic of daily task generation is tied to this table.
+
+1. `shop_item` represents all the available items you can buy in the game. Function is a special column which is tied with application's business logic of attaining perks from bought items. `user` contains balance field which is a part of the shop system too.
+
+1. The rest of `user` fields and `authority` table are used for the authentication logic.
+
+> **Note:**
+> All passwords in the database are one end encrypted, no worries :wink:
+
+<img src="./github-related/achlearnment-diagram.png" alt="Database diagram image">
+
+### :herb: Spring application
+
+This section is under construction :construction:
+
+### :newspaper: React application
+
+This section is under construction :construction:
 
 ---
 
