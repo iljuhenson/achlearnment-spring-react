@@ -21,7 +21,7 @@ CREATE TABLE `fill_task_part` (
 
 CREATE TABLE `main_task_part` (
                                   `id` int(11) NOT NULL AUTO_INCREMENT,
-                                  `text` varchar(100) NOT NULL,
+                                  `text` text NOT NULL,
                                   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -124,3 +124,35 @@ VALUES ('EASY', 5, 5),
        ('MEDIUM', 10, 10),
        ('HARD', 20, 20);
 
+INSERT INTO achlearnment.main_task_part
+(`text`)
+VALUES ('Pretend that you are an actor, do a play about %s for %d minutes.'),
+('Tell Santa Claus that you behaved well this year and why %s should be your present for %d minutes.'),
+('Pretend that you can''t live without %s for %d minutes.'),
+('Pretend that you argue with someone about %s for %d minutes.'),
+('Pretend that you try to get a job where main objective is %s for %d minutes.'),
+('Explain to your boss why you were late to the job because of %s for %d minutes.'),
+('Pretend like you are a %s club leader, and you are trying to get more members into the club for %d minutes.'),
+('Create a presentation discussing the historical significance of %s and its impact on society for %d minutes.'),
+('Imagine a futuristic society where advancements in %s have led to significant societal changes, and describe what that world would look like for %d minutes.'),
+('Give a scientific presentation analyzing the potential applications of %s in various industries for %d minutes.'),
+('Imagine a world where %s is the primary source of energy, and describe how it has transformed daily life for %d minutes.'),
+('Pretend to interview for a job where the primary objective is to innovate and improve %s for %d minutes.'),
+('Explain how %s was invented for %d minutes.'),
+('Explain how %s is the reason you haven''t done your homework for %d minutes.'),
+('Be an interviewer who asks a person about %s for %d minutes.'),
+('Come up with a sport where %s plays significant role and explain the rules of it for %d minutes.'),
+('Explain how %s started a new lockdown for %d minutes.'),
+('Give a Steve Jobs style presentation of %s for %d minutes.'),
+('Try to explain how %s will become a next IPhone for %d minutes.'),
+('Fire an employee because of %s for %d minutes.'),
+('Explain how %s helped neanderthals survive for %d minutes.'),
+('Pretend you''re a news reporter, reporting on a major event involving %s for %d minutes.'),
+('Imagine being a teacher and explain the concept of %s to a class of students for %d minutes.'),
+('Pretend you''re a lawyer defending a case involving %s for %d minutes.'),
+('Imagine being a salesperson trying to convince a customer to buy %s for %d minutes.'),
+('Envision a world where %s does not exist, and describe how that would affect everyday life for %d minutes.'),
+('Create a TED talk about the importance of %s in today''s society for %d minutes.'),
+('Pretend to host a cooking show where %s is the main ingredient for %d minutes.'),
+('Imagine being a doctor and explain the effects of %s on the human body for %d minutes.'),
+('Pretend to be a tour guide showcasing the wonders of %s for %d minutes.');
