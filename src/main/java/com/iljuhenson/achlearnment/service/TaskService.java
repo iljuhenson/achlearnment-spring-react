@@ -8,7 +8,7 @@ import com.iljuhenson.achlearnment.service.exception.TaskException;
 import java.util.List;
 
 public interface TaskService {
-    void finishUserTaskOfId(User user, int taskId);
+    void finishUserTaskOfId(User user, int taskId) throws TaskException;
     List<TaskDO> findAllUserTasks(User user) throws TaskException;
     void generateUserTasks(User user);
 }

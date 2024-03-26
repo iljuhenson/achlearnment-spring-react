@@ -181,4 +181,8 @@ public class User implements UserDetails {
     public void clearTasks() {
         tasks = null;
     }
+
+    public Optional<Task> findTaskById(int taskId) {
+        return tasks.stream().filter(task -> taskId == task.getId()).findFirst();
+    }
 }

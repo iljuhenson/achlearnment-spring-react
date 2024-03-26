@@ -7,6 +7,7 @@ import com.iljuhenson.achlearnment.service.TaskService;
 import com.iljuhenson.achlearnment.service.UserService;
 import com.iljuhenson.achlearnment.service.exception.TaskException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -32,14 +33,25 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void finishUserTaskOfId(User user, int taskId) {
-        // TODO: implements this method, to do so, I need to create a new column is_finished in db.
+    public void finishUserTaskOfId(User user, int taskId) throws TaskException{
+        Optional<Task> finishedTaskOptional = user.findTaskById(taskId);
+
+        if (finishedTaskOptional.isEmpty()) {
+            throw new TaskException("There's no such task with id of '%d'.".formatted(taskId));
+        }
+
+        Task finishedTask = finishedTaskOptional.get();
+        finishedTask.setCompleted(true);
+        int balance = user.getBalance();
+        user.setBalance(balance + finishedTask.getTaskType().getPay());
+
+        userService.save(user);
     }
 
     @Override
     public List<TaskDO> findAllUserTasks(User user) throws TaskException {
         if(!user.hasTodayActivity()) {
-            throw new TaskException("You can't query tasks until you query activity");
+            throw new TaskException("You didn't query activity endpoint to unblock this.");
         }
 
         return user.getTasks().stream().map(task -> new TaskDO(task.getId(), task.getMainTaskPart().getText(), task.getFillTaskPart().getWord())).toList();
