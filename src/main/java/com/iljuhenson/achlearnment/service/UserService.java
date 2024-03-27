@@ -12,4 +12,6 @@ public interface UserService {
     // TODO: authentication, registration, settings
     void save(User user);
 
+    int getBalance(User user);
+
 }

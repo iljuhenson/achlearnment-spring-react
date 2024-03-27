@@ -56,6 +56,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int getBalance(User user) {
+        return user.getBalance();
+    }
+
+    @Override
     public void save(User user) {
         userRepository.saveAndFlush(user);
     }
