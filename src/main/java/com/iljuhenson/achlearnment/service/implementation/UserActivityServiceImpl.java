@@ -8,6 +8,7 @@ import com.iljuhenson.achlearnment.service.TaskService;
 import com.iljuhenson.achlearnment.service.UserActivityService;
 import com.iljuhenson.achlearnment.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -26,10 +27,11 @@ public class UserActivityServiceImpl implements UserActivityService {
     }
 
     @Override
+    @Transactional
     public List<UserActivityDO> findAllUserActivities(User user) {
         if (!user.hasTodayActivity()) {
             updateTodayUserActivity(user);
-//            taskService.generateUserTasks(user);
+            taskService.generateUserTasks(user);
             userService.save(user);
         }
 

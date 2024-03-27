@@ -1,6 +1,7 @@
 package com.iljuhenson.achlearnment.controller;
 
 import com.iljuhenson.achlearnment.entity.User;
+import com.iljuhenson.achlearnment.service.DO.ExceptionDO;
 import com.iljuhenson.achlearnment.service.DO.ShopItemDO;
 import com.iljuhenson.achlearnment.service.ShopItemService;
 import com.iljuhenson.achlearnment.service.exception.ShopItemException;
@@ -42,10 +43,10 @@ public class ShopController {
     }
 
     @ExceptionHandler({ ShopItemException.class })
-    public ResponseEntity<Object> handleShopItemException(
+    public ResponseEntity<ExceptionDO> handleShopItemException(
             Exception ex, WebRequest request) {
-        return new ResponseEntity<Object>(
-                ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ExceptionDO>(
+                new ExceptionDO(ex.getMessage()), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
 }

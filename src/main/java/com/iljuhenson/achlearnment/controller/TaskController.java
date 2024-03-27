@@ -1,6 +1,7 @@
 package com.iljuhenson.achlearnment.controller;
 
 import com.iljuhenson.achlearnment.entity.User;
+import com.iljuhenson.achlearnment.service.DO.ExceptionDO;
 import com.iljuhenson.achlearnment.service.DO.TaskDO;
 import com.iljuhenson.achlearnment.service.TaskService;
 import com.iljuhenson.achlearnment.service.exception.ShopItemException;
@@ -32,16 +33,16 @@ public class TaskController {
     }
 
     @PutMapping("/user/tasks/{taskId}/complete")
-    public HttpStatus completeUserTask(@AuthenticationPrincipal User user, @PathVariable int taskId) throws TaskException {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void completeUserTask(@AuthenticationPrincipal User user, @PathVariable int taskId) throws TaskException {
         taskService.finishUserTaskOfId(user, taskId);
-        return HttpStatus.ACCEPTED;
     }
 
     @ExceptionHandler({ TaskException.class })
-    public ResponseEntity<Object> handleShopItemException(
+    public ResponseEntity<ExceptionDO> handleShopItemException(
             Exception ex, WebRequest request) {
-        return new ResponseEntity<Object>(
-                ex.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT);
+        return new ResponseEntity<ExceptionDO>(
+                new ExceptionDO(ex.getMessage()), new HttpHeaders(), HttpStatus.CONFLICT);
     }
 
 

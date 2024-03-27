@@ -1,6 +1,5 @@
 package com.iljuhenson.achlearnment.entity;
 
-import com.iljuhenson.achlearnment.entity.enums.TaskTypeEnum;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -14,8 +13,7 @@ public class TaskType {
     private Integer id;
 
     @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private TaskTypeEnum type;
+    private String type;
 
     @Column(name = "pay")
     private Integer pay;
@@ -35,14 +33,6 @@ public class TaskType {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public TaskTypeEnum getType() {
-        return type;
-    }
-
-    public void setType(TaskTypeEnum type) {
-        this.type = type;
     }
 
     public Integer getPay() {
@@ -78,6 +68,20 @@ public class TaskType {
                 ", duration=" + duration +
                 ", tasks=" + tasks +
                 '}';
+    }
+
+    public TaskType(String type, Integer pay, Integer duration) {
+        this.type = type;
+        this.pay = pay;
+        this.duration = duration;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public TaskType(Integer pay, Integer duration) {

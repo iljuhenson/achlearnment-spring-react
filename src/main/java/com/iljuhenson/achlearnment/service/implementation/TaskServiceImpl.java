@@ -9,6 +9,7 @@ import com.iljuhenson.achlearnment.service.exception.TaskException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,6 +42,10 @@ public class TaskServiceImpl implements TaskService {
         }
 
         Task finishedTask = finishedTaskOptional.get();
+
+        if (finishedTask.getCompleted()) {
+            throw new TaskException("Task is already completed");
+        }
         finishedTask.setCompleted(true);
         int balance = user.getBalance();
         user.setBalance(balance + finishedTask.getTaskType().getPay());
@@ -54,7 +59,7 @@ public class TaskServiceImpl implements TaskService {
             throw new TaskException("You didn't query activity endpoint to unblock this.");
         }
 
-        return user.getTasks().stream().map(task -> new TaskDO(task.getId(), task.getMainTaskPart().getText(), task.getFillTaskPart().getWord())).toList();
+        return user.getTasks().stream().map(task -> new TaskDO(task.getId(), task.getMainTaskPart().getText(), task.getFillTaskPart().getWord(), task.getTaskType().getType(), task.getTaskType().getDuration(), task.getTaskType().getPay(), task.getCompleted())).toList();
     }
 
     @Override
@@ -84,7 +89,7 @@ public class TaskServiceImpl implements TaskService {
         Set<Task> tasks = IntStream.range(0, amountOfTasks).mapToObj(i -> new Task(randomFillTaskParts.get(i), randomMainTaskParts.get(i), randomTaskTypes.get(i), user)).collect(Collectors.toSet());
 
         user.setTasks(tasks);
-
-        userService.save(user);
+//
+//        userService.save(user);
     }
 }
