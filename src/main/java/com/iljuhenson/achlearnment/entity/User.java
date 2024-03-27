@@ -1,5 +1,6 @@
 package com.iljuhenson.achlearnment.entity;
 
+import com.iljuhenson.achlearnment.entity.enums.ShopItemFunctionEnum;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -174,8 +175,11 @@ public class User implements UserDetails {
     }
 
     public int calculateAmountOfTasks() {
-        // TODO: calculate task amount based on the applied shop items.
-        return 5;
+        int defaultTaskAmount = 4;
+
+        int bonusTaskAmount = (int) shopItems.stream().filter(shopItem -> shopItem.getFunction() == ShopItemFunctionEnum.EXPAND_DAILY_TASK_AMOUNT).count();
+
+        return defaultTaskAmount + bonusTaskAmount;
     }
 
     public void clearTasks() {
