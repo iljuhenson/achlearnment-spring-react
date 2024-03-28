@@ -29,20 +29,11 @@ public class ShopController {
 
     @GetMapping("/user/shop/items")
     @Operation(
-            description = "Returns only shop items which were purchased by the user.",
-            summary = "Returns user shop items"
+            description = "Returns all available shop items including the ones that user have already bought and those which he didn't buy.",
+            summary = "Returns shop items"
     )
-    public List<ShopItemDO> getUserPurchasedItems(@AuthenticationPrincipal User user) {
-        return shopItemService.findAllUsersItems(user);
-    }
-
-    @GetMapping("/shop/items")
-    @Operation(
-            description = "Returns all available shop items those who users bought and those who he didn't buy.",
-            summary = "Returns all shop items"
-    )
-    public List<ShopItemDO> getItems() {
-        return shopItemService.findAll();
+    public List<ShopItemDO> getItems(@AuthenticationPrincipal User user) {
+        return shopItemService.findAll(user);
     }
 
     @PutMapping("/user/shop/items/{itemId}/buy")

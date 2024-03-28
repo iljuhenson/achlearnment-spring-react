@@ -11,8 +11,7 @@ import java.util.List;
 
 
 public interface ShopItemService {
-    List<ShopItemDO> findAll();
-    List<ShopItemDO> findAllUsersItems(User user);
+    List<ShopItemDO> findAll(User user);
     void buyItem(User user, int itemId) throws ShopItemException;
     void listAllUsersPerks();
 }

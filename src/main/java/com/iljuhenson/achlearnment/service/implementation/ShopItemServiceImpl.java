@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,16 +27,14 @@ public class ShopItemServiceImpl implements ShopItemService {
     }
 
     @Override
-    public List<ShopItemDO> findAll() {
+    public List<ShopItemDO> findAll(User user) {
         List<ShopItem> shopItems = shopItemRepository.findAll();
-        List<ShopItemDO> shopItemsDO = shopItems.stream().map(item -> new ShopItemDO(item.getId(), item.getName(), item.getDescription(), item.getPrice())).toList();
-        return shopItemsDO;
-    }
+        Set<ShopItem> userShopItems = user.getShopItems();
 
-    @Override
-    public List<ShopItemDO> findAllUsersItems(User user) {
-        List<ShopItem> shopItems = List.copyOf(user.getShopItems());
-        List<ShopItemDO> shopItemsDO = shopItems.stream().map(item -> new ShopItemDO(item.getId(), item.getName(), item.getDescription(), item.getPrice())).toList();
+        List<ShopItemDO> shopItemsDO = shopItems.stream().map(item -> {
+            boolean isBought = userShopItems.stream().anyMatch(userItem -> userItem.getId() == item.getId());
+            return new ShopItemDO(item.getId(), item.getName(), item.getDescription(), item.getPrice(), isBought);
+        }).toList();
         return shopItemsDO;
     }
 

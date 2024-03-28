@@ -6,6 +6,24 @@ public class ShopItemDO {
     private String description;
     private int price;
 
+    private boolean isBought;
+
+    public ShopItemDO(int id, String name, String description, int price, boolean isBought) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.isBought = isBought;
+    }
+
+    public boolean isBought() {
+        return isBought;
+    }
+
+    public void setBought(boolean bought) {
+        isBought = bought;
+    }
+
     public int getId() {
         return id;
     }
