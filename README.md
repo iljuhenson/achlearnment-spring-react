@@ -82,7 +82,9 @@ This schema fully incapsulates the data representation logic behind achlearnment
 
 ### :herb: Spring application
 
-This section is under construction :construction:
+To provide maximum extendability and maintainability Achlearnment Spring Application(or Backend) utilizes multilayer architecture.
+
+<img src="./github-related/spring-app-diagram.png" alt="Spring application diagram image">
 
 ### :newspaper: React application
 
