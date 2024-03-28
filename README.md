@@ -39,7 +39,7 @@ achlearnment.
 
 Just go to [*website-link-that-is-yet-not-available*](#).
 
-But if you're craving to run your own copy of the application localy you can do so by following these instructions:
+But if you're craving to run your own copy of the application locally you can do so by following these instructions:
 
 > **Note:**
 > You need to have [Docker](https://docs.docker.com/engine/install/) installed on your machine.
@@ -59,7 +59,7 @@ $ docker-compose up
 
 ### :link: Swagger
 
-<img src="./github-related/swagger-ui.png" alt="Database diagram image">
+<img src="./github-related/swagger-ui.png" alt="Swagger screenshot">
 
 ## <a name="app-architecture"></a>:triangular_ruler: Application architecture
 

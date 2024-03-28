@@ -319,3 +319,11 @@ VALUES ('Dinosaur'),
        ('Wire cutter'),
        ('Paintbrush'),
        ('Trowel');
+
+
+INSERT INTO achlearnment.shop_item
+(name, price, description, `function`)
+VALUES('Task-o-dogo', 60, 'This dog is so, I mean, SOOOOO needy and to make you play with it longer it gives you 1 additional daily task.', 'EXPAND_DAILY_TASK_AMOUNT'),
+      ('Taskboard', 140, 'Ding, ding, ding that''s a pretty huge board, I think it''s large enough to fit 1 extra daily task.', 'EXPAND_DAILY_TASK_AMOUNT'),
+      ('Counter Task', 200, 'That''s a game, right? So it gives you 1 extra task per day.', 'EXPAND_DAILY_TASK_AMOUNT'),
+      ('Task hive', 240, 'Those task-bees are so kind that they give you 1 extra daily task.', 'EXPAND_DAILY_TASK_AMOUNT');

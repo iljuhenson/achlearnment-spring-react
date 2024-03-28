@@ -24,7 +24,7 @@ public class ShopItem {
     private String description;
 
     @Column(name = "function")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ShopItemFunctionEnum function;
 
     @ManyToMany
