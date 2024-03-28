@@ -6,6 +6,7 @@ import com.iljuhenson.achlearnment.service.DO.TaskDO;
 import com.iljuhenson.achlearnment.service.TaskService;
 import com.iljuhenson.achlearnment.service.exception.ShopItemException;
 import com.iljuhenson.achlearnment.service.exception.TaskException;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,12 +29,20 @@ public class TaskController {
     }
 
     @GetMapping("/user/tasks")
+    @Operation(
+            description = "Returns all the tasks which were assigned to the user today. Returns an error when \"/user/activities\" haven't been queried today.",
+            summary = "Returns tasks assigned to user"
+    )
     public List<TaskDO> getUserTasks(@AuthenticationPrincipal User user) throws TaskException {
         return taskService.findAllUserTasks(user);
     }
 
     @PutMapping("/user/tasks/{taskId}/complete")
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @Operation(
+            description = "Marks user task as completed and increases user balance by the task pay.",
+            summary = "Marks user task as completed"
+    )
     public void completeUserTask(@AuthenticationPrincipal User user, @PathVariable int taskId) throws TaskException {
         taskService.finishUserTaskOfId(user, taskId);
     }

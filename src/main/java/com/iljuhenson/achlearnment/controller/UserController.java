@@ -8,6 +8,7 @@ import com.iljuhenson.achlearnment.service.TaskService;
 import com.iljuhenson.achlearnment.service.UserService;
 import com.iljuhenson.achlearnment.service.exception.ShopItemException;
 import com.iljuhenson.achlearnment.service.exception.TaskException;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,10 @@ public class UserController {
     }
 
     @GetMapping("/user/balance")
+    @Operation(
+            description = "Returns user's balance.",
+            summary = "Returns user's balance"
+    )
     public UserDO getUserTasks(@AuthenticationPrincipal User user) throws TaskException {
         return new UserDO(userService.getBalance(user));
     }

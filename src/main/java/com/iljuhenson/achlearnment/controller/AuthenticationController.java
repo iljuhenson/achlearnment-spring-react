@@ -4,6 +4,7 @@ import com.iljuhenson.achlearnment.service.DO.AuthenticationRequestDO;
 import com.iljuhenson.achlearnment.service.DO.AuthenticationResponseDO;
 import com.iljuhenson.achlearnment.service.DO.RegisterRequestDO;
 import com.iljuhenson.achlearnment.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +23,20 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    @Operation(
+            description = "Creates new user, generates and returns JWT bearer token required for authentication.",
+            summary = "Creates new user and returns JWT bearer token required for authentication"
+    )
     public ResponseEntity<AuthenticationResponseDO> register(@RequestBody RegisterRequestDO request) {
         return ResponseEntity.ok(userService.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDO> register(@RequestBody AuthenticationRequestDO request) {
+    @Operation(
+            description = "Generates and returns JWT bearer token required for authentication.",
+            summary = "Returns JWT bearer token required for authentication"
+    )
+    public ResponseEntity<AuthenticationResponseDO> authenticate(@RequestBody AuthenticationRequestDO request) {
         return ResponseEntity.ok(userService.authenticate(request));
     }
 

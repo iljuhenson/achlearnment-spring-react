@@ -28,14 +28,14 @@ public class UserActivityServiceImpl implements UserActivityService {
 
     @Override
     @Transactional
-    public List<UserActivityDO> findAllUserActivities(User user) {
+    public List<LocalDate> findAllUserActivities(User user) {
         if (!user.hasTodayActivity()) {
             updateTodayUserActivity(user);
             taskService.generateUserTasks(user);
             userService.save(user);
         }
 
-        return user.getUserActivities().stream().map(activity -> new UserActivityDO(activity.getDay())).toList();
+        return user.getUserActivities().stream().map(UserActivity::getDay).toList();
     }
 
     public void updateTodayUserActivity(User user) {
