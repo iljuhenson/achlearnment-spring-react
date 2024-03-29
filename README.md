@@ -61,6 +61,14 @@ $ docker-compose up
 
 <img src="./github-related/swagger-ui.png" alt="Swagger screenshot">
 
+## <a name="dev-process"></a>:hammer_and_wrench: Development process
+
+### :email: Postman
+
+To conduct manual testing of the backend application Postman was used.
+
+<img src="./github-related/postman-showcase.png" alt="Postman screenshot">
+
 ## <a name="app-architecture"></a>:triangular_ruler: Application architecture
 
 ### :floppy_disk: Database
