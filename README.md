@@ -8,13 +8,18 @@
 <h4 align="center">Learn foreign languages the fun way! :uk: :jp: :poland:</h4>
 
 <p align="center">
-  <a href="#overview">Overview</a> •
-  <a href="#try">Where can I find this application?</a> •
-  <a href="#screenshots">Screenshots</a> •
   <a href="#tech-stack">Tech stack</a> •
+  <a href="#overview">Overview</a> •
+  <a href="#try">Try it</a> •
+  <a href="#screenshots">Screenshots</a> •
   <a href="#dev-process">Development process</a> •
   <a href="#app-architecture">Application architecture</a>
 </p>
+
+|                               Backend                                |                                      Frontend                                       |                                      Deploy                                      |
+|:--------------------------------------------------------------------:|:-----------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
+|  ![Done](https://img.shields.io/badge/Done-green?style=flat-square)  | ![In progress](https://img.shields.io/badge/In%20progress-yellow?style=flat-square) | ![To be done](https://img.shields.io/badge/To%20be%20done-red?style=flat-square) |
+
 
 ## <a name="tech-stack"></a>:computer: Tech stack
 
