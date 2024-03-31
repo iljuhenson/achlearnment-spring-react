@@ -3,5 +3,9 @@ import styled from 'styled-components'
 export default styled.div`
     display: flex;
     flex-direction: column;
-    background-color: ;
+    background-color: ${({ theme }) => theme.colors.card.background };
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px 4px rgba(112, 144, 176, 0.2);
 `

@@ -1,21 +1,35 @@
 version: '3.9'
 
 services:
-  web:
+
+  frontend:
     build:
-      context: .
+      context: frontend
+      dockerfile: Dockerfile
+    expose:
+      - 5173
+    ports:
+      - "3000:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+
+  backend:
+    build:
+      context: backend
       dockerfile: Dockerfile
     ports:
       - "8000:8080"
     depends_on:
       - db
     volumes:
-      - .:/app
+      - ./backend:/app
 
   db:
     build:
-      context: .
-      dockerfile: ./DBDOCKERFILE
+      context: backend
+      dockerfile: backend/DBDockefile
     expose:
       - 3306
     ports:
@@ -23,6 +37,7 @@ services:
     volumes:
       - data:/var/lib/mysql
     env_file:
-      - ./dev.env
+      - backend/dev.env
+
 volumes:
   data:

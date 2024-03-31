@@ -1,4 +1,6 @@
-export default {
+import { DefaultTheme } from "styled-components";
+
+const primary : DefaultTheme = {
     colors: {
         app: {
             background: "#F5F5F7",
@@ -38,9 +40,17 @@ export default {
                 content: 16,
             },
             icon: 42,
-
+            spacing: 24
         },
-        mobile: {}
+        mobile: {
+            text: {
+                title: 20,
+                content: 16,
+            },
+            icon: 42,
+            spacing: 24
+        }
     }
-
 }
+
+export default primary
