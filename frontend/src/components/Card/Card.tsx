@@ -1,14 +1,13 @@
-import {ReactElement} from 'react'
+import {PropsWithChildren, ReactElement} from 'react'
 import CardWrapperStyled from "./CardWrapper/CardWrapper.styled.tsx";
 import HeaderWrapperStyled from "./HeaderWrapper/HeaderWrapper.styled.tsx";
 import MainWrapperStyled from "./MainWrapper/MainWrapper.styled.tsx";
 
 interface CardProps {
     headerComponent: ReactElement,
-    mainComponent: ReactElement,
 }
 
-function Card({headerComponent, mainComponent}: CardProps) {
+function Card({headerComponent, children}: PropsWithChildren<CardProps>) {
     return (
         <>
             <CardWrapperStyled>
@@ -16,7 +15,7 @@ function Card({headerComponent, mainComponent}: CardProps) {
                     {headerComponent}
                 </HeaderWrapperStyled>
                 <MainWrapperStyled>
-                    {mainComponent}
+                    {children}
                 </MainWrapperStyled>
             </CardWrapperStyled>
 

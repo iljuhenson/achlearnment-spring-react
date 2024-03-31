@@ -8,5 +8,6 @@ export default createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Open Sans', sans-serif;
         font-size: ${({ theme }) => theme.sizes.desktop.text.content}px;
+     color: ${({ theme }) => theme.colors.text.primary};
     }
  `
