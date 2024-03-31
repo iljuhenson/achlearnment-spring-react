@@ -10,6 +10,8 @@ import RightAlignedCardTitleStyled from "./components/RightAlignedCardTitle/Righ
 import LogoWrapperStyled from "./components/LogoWrapper/LogoWrapper.styled.tsx";
 import NewsMessage from "./components/NewsMessage/NewsMessage.tsx";
 import CardContentWrapperStyled from "./components/CardContentWrapper/CardContentWrapper.styled.tsx";
+import TextInputStyled from "./components/TextInput/TextInput.styled.tsx";
+import AuthFormStyled from "./components/AuthForm/AuthForm.styled.tsx";
 
 function App() {
 
@@ -26,7 +28,13 @@ function App() {
                                 </LogoWrapperStyled>
                             </FloatingButtonStyled>
                             <Card headerComponent={<RightAlignedCardTitleStyled>Login</RightAlignedCardTitleStyled>}>
-                                <div>text</div>
+                                <CardContentWrapperStyled>
+                                    <AuthFormStyled>
+                                    <TextInputStyled type="text" placeholder="Email"></TextInputStyled>
+                                    <TextInputStyled type="password" placeholder="Password"></TextInputStyled>
+                                        <input type="submit" />
+                                    </AuthFormStyled>
+                                </CardContentWrapperStyled>
                             </Card>
 
                         </ColumnWrapperStyled>
@@ -39,7 +47,7 @@ function App() {
                                     </NewsMessage>
                                     <NewsMessage color={primary.colors.tasks.medium} username={"Steve"}
                                                  isRightAligned={true}>
-                                        You mean Archlearnment? I’ve been using this for years!
+                                        You mean Achlearnment? I’ve been using this for years!
                                     </NewsMessage>
                                     <NewsMessage color={primary.colors.tasks.hard} username={"Ilya"}
                                                  isRightAligned={false}>
@@ -58,7 +66,6 @@ function App() {
                                         Nice bit, guys, what a good marketing strategy.
                                     </NewsMessage>
                                 </CardContentWrapperStyled>
-
                             </Card>
 
                         </ColumnWrapperStyled>
