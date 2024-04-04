@@ -11,11 +11,14 @@ import AuthSectionStyled from "../../components/AuthForm/AuthSection/AuthSection
 import TextInputStyled from "../../components/TextInput/TextInput.styled.tsx";
 import LoginRegisterLinkStyled from "../../components/LoginRegisterLink/LoginRegisterLink.styled.tsx";
 import DefaultButtonStyled from "../../components/DefaultButton/DefaultButton.styled.tsx";
-import NewsMessage from "../../components/NewsMessage/NewsMessage.tsx";
-import primary from "../../components/Themes/primary.ts";
 import AppBackgroundStyled from "../../components/AppBackground/AppBackground.styled.tsx";
+import NewsCard from "../../components/NewsCard/NewsCard.tsx";
+import {useState} from "react";
 
 function LoginPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
         <AppBackgroundStyled>
             <LoginGridStyled>
@@ -29,8 +32,8 @@ function LoginPage() {
                         <CardContentWrapperStyled>
                             <AuthFormStyled>
                                 <AuthSectionStyled>
-                                    <TextInputStyled type="text" placeholder="Email"></TextInputStyled>
-                                    <TextInputStyled type="password" placeholder="Password"></TextInputStyled>
+                                    <TextInputStyled type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}></TextInputStyled>
+                                    <TextInputStyled type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}></TextInputStyled>
 
                                 </AuthSectionStyled>
                                 <AuthSectionStyled>
@@ -44,34 +47,7 @@ function LoginPage() {
 
                 </ColumnWrapperStyled>
                 <ColumnWrapperStyled>
-                    <Card headerComponent={<RightAlignedCardTitleStyled>News</RightAlignedCardTitleStyled>}>
-                        <CardContentWrapperStyled>
-                            <NewsMessage color={primary.colors.tasks.easy} username={"Sonya"}
-                                         isRightAligned={false}>
-                                Did you see that new revolutionary app?
-                            </NewsMessage>
-                            <NewsMessage color={primary.colors.tasks.medium} username={"Steve"}
-                                         isRightAligned={true}>
-                                You mean Achlearnment? I’ve been using this for years!
-                            </NewsMessage>
-                            <NewsMessage color={primary.colors.tasks.hard} username={"Ilya"}
-                                         isRightAligned={false}>
-                                You too guys, who’s that guy who made it?
-                            </NewsMessage>
-                            <NewsMessage color={primary.colors.tasks.easy} username={"Sonya"}
-                                         isRightAligned={false}>
-                                Ehmmmm, how could you not know that?!?!?!
-                            </NewsMessage>
-                            <NewsMessage color={primary.colors.tasks.medium} username={"Steve"}
-                                         isRightAligned={true}>
-                                I think his name is iljuhenson. Go check out his github.
-                            </NewsMessage>
-                            <NewsMessage color={primary.colors.tasks.easy} username={"Sonya"}
-                                         isRightAligned={false}>
-                                Nice bit, guys, what a good marketing strategy.
-                            </NewsMessage>
-                        </CardContentWrapperStyled>
-                    </Card>
+                    <NewsCard />
 
                 </ColumnWrapperStyled>
             </LoginGridStyled>
