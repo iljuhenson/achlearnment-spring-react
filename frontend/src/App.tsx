@@ -24,13 +24,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+    const getToken = () : string | null => {
+        return localStorage.getItem('token');
+    }
 
     return (
         <>
             <ThemeProvider theme={primary}>
-                <RouterProvider router={router} />
                 <GlobalStylesStyled/>
-
+                <RouterProvider router={router} />
             </ThemeProvider>
         </>
     )

@@ -19,6 +19,26 @@ function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const login = async (email: string, password: string) => {
+        const loginUrl= "/api/auth/authenticate";
+        const requestBody = {
+            email: email,
+            password: password,
+        }
+
+        const response = await fetch(loginUrl, {
+            method: "POST",
+            body: JSON.stringify(requestBody),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const jsonResponse: {token: string} = await response.json();
+        const token : string = "Bearer " + jsonResponse.token;
+        localStorage.setItem('token', token);
+        console.log(token);
+    }
+
     return (
         <AppBackgroundStyled>
             <LoginGridStyled>
@@ -30,7 +50,7 @@ function LoginPage() {
                     </FloatingButtonStyled>
                     <Card headerComponent={<RightAlignedCardTitleStyled>Login</RightAlignedCardTitleStyled>}>
                         <CardContentWrapperStyled>
-                            <AuthFormStyled>
+                            <AuthFormStyled onSubmit={async (e) => {e.preventDefault(); await login(email, password)}}>
                                 <AuthSectionStyled>
                                     <TextInputStyled type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}></TextInputStyled>
                                     <TextInputStyled type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}></TextInputStyled>
@@ -38,7 +58,7 @@ function LoginPage() {
                                 </AuthSectionStyled>
                                 <AuthSectionStyled>
                                     <LoginRegisterLinkStyled to="/register">I don't have an account</LoginRegisterLinkStyled>
-                                    <DefaultButtonStyled type="submit" value="Login" />
+                                    <DefaultButtonStyled type="submit" value="Login"  />
 
                                 </AuthSectionStyled>
                             </AuthFormStyled>
