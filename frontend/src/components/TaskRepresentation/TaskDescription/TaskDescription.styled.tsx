@@ -3,6 +3,6 @@ import styled from "styled-components";
 export default styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: end;
+    gap: 4px;
+    padding-top: 8px;
 `

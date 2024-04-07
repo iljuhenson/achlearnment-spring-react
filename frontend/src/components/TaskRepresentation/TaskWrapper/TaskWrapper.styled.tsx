@@ -6,4 +6,5 @@ export default styled.div<{bgColor : string}>`
     background-color: ${({ bgColor }) => bgColor };
     border-radius: 16px;
     overflow: hidden;
+    
 `

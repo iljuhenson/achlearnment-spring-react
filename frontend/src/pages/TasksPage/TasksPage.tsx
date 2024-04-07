@@ -17,6 +17,17 @@ function TasksPage() {
     const [shopItems, setShopItems] = useState<Array<ShopItem>>([]);
     const [activities, setActivities] = useState<Activities>([]);
 
+    const [selectedTask, setSelectedTask] = useState<number | null>(null);
+
+    const expandTask = (taskId: number) => {
+        if(taskId === selectedTask) {
+            setSelectedTask(null);
+        } else {
+            setSelectedTask(taskId);
+        }
+
+    }
+
     const fetchTasks = async () => {
         const tasksUrl = "/api/user/tasks";
 
@@ -107,7 +118,7 @@ function TasksPage() {
                     <Card isTakingAllHeight={true}
                           headerComponent={<RightAlignedCardTitleStyled>Tasks</RightAlignedCardTitleStyled>}>
                         <TasksWrapperStyled>
-                            {tasks.map(task => <TaskRepresentation key={task.id} {...task}></TaskRepresentation>)}
+                            {tasks.map(task => <TaskRepresentation key={task.id} selectedTask={selectedTask} expandTask={expandTask} {...task}></TaskRepresentation>)}
                         </TasksWrapperStyled>
                     </Card>
                 </ColumnWrapperStyled>

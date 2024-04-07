@@ -4,65 +4,65 @@ import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVer
 import IconWrapperStyled from "../IconWrapper/IconWrapper.styled.tsx";
 import {useTheme} from "styled-components";
 import {
-    ArrowDropDownOutlined,
+    ArrowDropDownOutlined, ArrowDropUpOutlined,
     SentimentDissatisfiedOutlined,
     SentimentSatisfiedOutlined,
     TaskAltOutlined
 } from "@mui/icons-material";
 import TaskActiveSectionStyled from "./TaskActiveSection/TaskActiveSection.styled.tsx";
-import TaskColumnWrapperStyled from "./TaskColumnWrapper/TaskColumnWrapper.styled.tsx";
-import TaskButtonsColumnWrapperStyled from "./TaskButtonsColumnWrapper/TaskButtonsColumnWrapper.styled.tsx";
-import CompleteIconButtonStyledJsx from "./CompleteIconButton/CompleteIconButton.styled.jsx.tsx";
+import CompleteIconButtonStyled from "./CompleteIconButton/CompleteIconButton.styled.tsx";
+import PayStyled from "./Pay/Pay.styled.tsx";
+import TaskDescriptionStyled from "./TaskDescription/TaskDescription.styled.tsx";
 
-type TaskProps = Task;
+type TaskProps = Task & {expandTask: (taskId : number) => void, selectedTask: number | null};
 
-function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration, pay, completed}: TaskProps) {
+function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration, pay, completed, expandTask, selectedTask}: TaskProps) {
     const theme = useTheme();
     let backgroundColor: string;
     let svgIcon: React.JSX.Element;
     switch (taskType) {
         case 'HARD':
             backgroundColor = theme.colors.tasks.hard;
-            svgIcon = <SentimentDissatisfiedOutlined />
+            svgIcon = <SentimentDissatisfiedOutlined/>
             break;
         case 'MEDIUM':
             backgroundColor = theme.colors.tasks.medium;
-            svgIcon = <SentimentSatisfiedOutlined />
+            svgIcon = <SentimentSatisfiedOutlined/>
             break;
         case 'EASY':
             backgroundColor = theme.colors.tasks.easy;
-            svgIcon = <SentimentVerySatisfiedOutlinedIcon />
+            svgIcon = <SentimentVerySatisfiedOutlinedIcon/>
             break;
         default:
             backgroundColor = theme.colors.tasks.easy;
-            svgIcon = <SentimentVerySatisfiedOutlinedIcon />
+            svgIcon = <SentimentVerySatisfiedOutlinedIcon/>
     }
 
     if (completed === true) {
         backgroundColor = theme.colors.tasks.completed;
     }
 
+    const taskParts = mainTaskPart.replace("%d", duration.toString()).split("%s");
 
     return (
-        <TaskWrapperStyled bgColor={backgroundColor}>
+        <TaskWrapperStyled onClick={() => expandTask(id)} bgColor={backgroundColor}>
             <IconWrapperStyled>
                 {svgIcon}
             </IconWrapperStyled>
 
             <TaskActiveSectionStyled>
-                <TaskColumnWrapperStyled>
+                <TaskDescriptionStyled>
                     <h3>{fillTaskPart.toUpperCase()}</h3>
-                    <p>{mainTaskPart.replace("%d", duration.toString()).replace("%s", fillTaskPart.toLowerCase())}</p>
-                    <p>pay: {pay}</p>
-                </TaskColumnWrapperStyled>
-                <TaskButtonsColumnWrapperStyled>
+                    <p>{taskParts[0]}<b>{fillTaskPart.toLowerCase()}</b>{taskParts[1]}</p>
+
+                </TaskDescriptionStyled>
+
+
                     <IconWrapperStyled>
-                        <ArrowDropDownOutlined />
+                        {selectedTask === id ? <ArrowDropUpOutlined/> : <ArrowDropDownOutlined/>}
                     </IconWrapperStyled>
-                    <CompleteIconButtonStyledJsx>
-                        <TaskAltOutlined></TaskAltOutlined>
-                    </CompleteIconButtonStyledJsx>
-                </TaskButtonsColumnWrapperStyled>
+                    <PayStyled>pay: {pay}</PayStyled>
+                    {completed ? "" : <CompleteIconButtonStyled><TaskAltOutlined></TaskAltOutlined></CompleteIconButtonStyled>}
             </TaskActiveSectionStyled>
         </TaskWrapperStyled>
     );

@@ -39,7 +39,7 @@ const primary : DefaultTheme = {
                 title: 20,
                 content: 16,
             },
-            icon: 42,
+            icon: 36,
             spacing: 24
         },
         mobile: {
@@ -47,7 +47,7 @@ const primary : DefaultTheme = {
                 title: 20,
                 content: 16,
             },
-            icon: 42,
+            icon: 36,
             spacing: 24
         }
     }
