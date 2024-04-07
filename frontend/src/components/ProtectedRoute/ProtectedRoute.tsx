@@ -9,7 +9,7 @@ function ProtectedRoute({ children }: ProtectedProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(token === null) {
+        if(token === undefined) {
             navigate('/login', {replace: true})
         }
     }, [navigate, token])

@@ -16,8 +16,11 @@ import NewsCard from "../../components/NewsCard/NewsCard.tsx";
 import {useContext, useState} from "react";
 import {TokenContext} from "../../context/context.ts";
 import CredentialsErrorDialogStyled from "../../components/CredentialsErrorDialog/CredentialsErrorDialog.styled.tsx";
+import {useNavigate} from "react-router-dom";
 
 function LoginPage() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const {updateToken} = useContext(TokenContext);
@@ -41,6 +44,7 @@ function LoginPage() {
             const jsonResponse: {token: string} = await response.json();
             const token : string = "Bearer " + jsonResponse.token;
             updateToken(token);
+            navigate('/', {replace: true})
         } else {
             setCredentialsError(true);
         }

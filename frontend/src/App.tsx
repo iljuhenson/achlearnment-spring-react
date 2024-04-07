@@ -29,8 +29,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    const getToken = () : string | null => {
-        return localStorage.getItem('token') || null;
+    const getToken = () : string | undefined => {
+        return localStorage.getItem('token') || undefined;
     };
 
     const [token, setToken] = useState(getToken());
@@ -39,13 +39,12 @@ function App() {
         setToken(getToken());
     }, []);
 
-    const updateToken = (token: string | null) => {
+    const updateToken = (token: string | undefined) => {
         setToken(token);
-        if(token === null) {
+        if(token === undefined) {
             localStorage.removeItem("token");
         } else {
             localStorage.setItem("token", token);
-
         }
     }
 
