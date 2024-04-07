@@ -8,6 +8,7 @@ import {useContext, useEffect, useState} from "react";
 import TaskRepresentation from "../../components/TaskRepresentation/TaskRepresentation.tsx";
 import {TokenContext} from "../../context/context.ts";
 import FlexOneWrapperStyled from "../../components/FlexOneWrapper/FlexOneWrapper.styled.tsx";
+import TasksWrapperStyled from "../../components/TasksWrapper/TasksWrapper.styled.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -105,7 +106,9 @@ function TasksPage() {
                 <ColumnWrapperStyled>
                     <Card isTakingAllHeight={true}
                           headerComponent={<RightAlignedCardTitleStyled>Tasks</RightAlignedCardTitleStyled>}>
-                        {tasks.map(task => <TaskRepresentation key={task.id} {...task}></TaskRepresentation>)}
+                        <TasksWrapperStyled>
+                            {tasks.map(task => <TaskRepresentation key={task.id} {...task}></TaskRepresentation>)}
+                        </TasksWrapperStyled>
                     </Card>
                 </ColumnWrapperStyled>
                 <ColumnWrapperStyled>
