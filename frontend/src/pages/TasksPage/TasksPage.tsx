@@ -4,9 +4,10 @@ import Card from "../../components/Card/Card.tsx";
 import AppGridStyled from "../../components/AppGrid/AppGrid.styled.tsx";
 import RightAlignedCardTitleStyled from "../../components/RightAlignedCardTitle/RightAlignedCardTitle.styled.tsx";
 import {Activities, BalanceObject, ShopItem, Task} from "./types/tasks";
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import TaskRepresentation from "../../components/TaskRepresentation/TaskRepresentation.tsx";
 import {TokenContext} from "../../context/context.ts";
+import FlexOneWrapperStyled from "../../components/FlexOneWrapper/FlexOneWrapper.styled.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -16,7 +17,7 @@ function TasksPage() {
     const [activities, setActivities] = useState<Activities>([]);
 
     const fetchTasks = async () => {
-        const tasksUrl= "/api/user/tasks";
+        const tasksUrl = "/api/user/tasks";
 
         const response = await fetch(tasksUrl, {
             method: "GET",
@@ -25,7 +26,7 @@ function TasksPage() {
                 "Content-Type": "application/json",
             },
         });
-        if(response.ok) {
+        if (response.ok) {
             const jsonResponse: Array<Task> = await response.json();
             setTasks(jsonResponse);
         } else if (response.status === 403) {
@@ -34,7 +35,7 @@ function TasksPage() {
     }
 
     const fetchActivities = async () => {
-        const activitiesUrl= "/api/user/activities";
+        const activitiesUrl = "/api/user/activities";
 
         const response = await fetch(activitiesUrl, {
             method: "GET",
@@ -43,7 +44,7 @@ function TasksPage() {
                 "Content-Type": "application/json",
             },
         });
-        if(response.ok) {
+        if (response.ok) {
             const jsonResponse: Activities = await response.json();
             setActivities(jsonResponse);
         } else if (response.status === 403) {
@@ -52,7 +53,7 @@ function TasksPage() {
     }
 
     const fetchBalance = async () => {
-        const balanceUrl= "/api/user/balance";
+        const balanceUrl = "/api/user/balance";
 
         const response = await fetch(balanceUrl, {
             method: "GET",
@@ -61,7 +62,7 @@ function TasksPage() {
                 "Content-Type": "application/json",
             },
         });
-        if(response.ok) {
+        if (response.ok) {
             const jsonResponse: BalanceObject = await response.json();
             setBalanceObject(jsonResponse);
         } else if (response.status === 403) {
@@ -70,7 +71,7 @@ function TasksPage() {
     }
 
     const fetchShopItems = async () => {
-        const shopItemsUrl= "/api/user/shop/items";
+        const shopItemsUrl = "/api/user/shop/items";
 
         const response = await fetch(shopItemsUrl, {
             method: "GET",
@@ -79,7 +80,7 @@ function TasksPage() {
                 "Content-Type": "application/json",
             },
         });
-        if(response.ok) {
+        if (response.ok) {
             const jsonResponse: Array<ShopItem> = await response.json();
             setShopItems(jsonResponse);
         } else if (response.status === 403) {
@@ -102,12 +103,20 @@ function TasksPage() {
         <AppBackgroundStyled>
             <AppGridStyled>
                 <ColumnWrapperStyled>
-                    <Card headerComponent={<RightAlignedCardTitleStyled>Tasks</RightAlignedCardTitleStyled>}>
+                    <Card isTakingAllHeight={true}
+                          headerComponent={<RightAlignedCardTitleStyled>Tasks</RightAlignedCardTitleStyled>}>
                         {tasks.map(task => <TaskRepresentation key={task.id} {...task}></TaskRepresentation>)}
                     </Card>
                 </ColumnWrapperStyled>
                 <ColumnWrapperStyled>
-
+                    <FlexOneWrapperStyled><Card isTakingAllHeight={true} headerComponent={
+                        <RightAlignedCardTitleStyled>Calendar</RightAlignedCardTitleStyled>}>
+                        Calendar Content
+                    </Card></FlexOneWrapperStyled>
+                    <FlexOneWrapperStyled><Card isTakingAllHeight={true} headerComponent={
+                        <RightAlignedCardTitleStyled>Shop</RightAlignedCardTitleStyled>}>
+                        Shop content
+                    </Card></FlexOneWrapperStyled>
                 </ColumnWrapperStyled>
             </AppGridStyled>
         </AppBackgroundStyled>

@@ -5,12 +5,13 @@ import MainWrapperStyled from "./MainWrapper/MainWrapper.styled.tsx";
 
 interface CardProps {
     headerComponent: ReactElement,
+    isTakingAllHeight?: boolean,
 }
 
-function Card({headerComponent, children}: PropsWithChildren<CardProps>) {
+function Card({headerComponent, isTakingAllHeight, children}: PropsWithChildren<CardProps>) {
     return (
         <>
-            <CardWrapperStyled>
+            <CardWrapperStyled isTakingAllHeight={isTakingAllHeight || false}>
                 <HeaderWrapperStyled>
                     {headerComponent}
                 </HeaderWrapperStyled>
