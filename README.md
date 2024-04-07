@@ -60,6 +60,9 @@ $ cd achlearnment-spring-react
 $ docker-compose up
 ```
 
+Interested into looking at the UI of the application? Go to [localhost:3000](http://localhost:3000).<br/>
+Interested into learning more about the API and server side implementation? [localhost:8000/swagger-ui/index.html#/](http://localhost:8000/swagger-ui/index.html#/) can help with that.
+
 ## <a name="screenshots"></a>:camera: Screenshots
 
 ### :link: Swagger
