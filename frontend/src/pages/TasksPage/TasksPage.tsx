@@ -9,6 +9,13 @@ import TaskRepresentation from "../../components/TaskRepresentation/TaskRepresen
 import {TokenContext} from "../../context/context.ts";
 import FlexOneWrapperStyled from "../../components/FlexOneWrapper/FlexOneWrapper.styled.tsx";
 import TasksWrapperStyled from "../../components/TasksWrapper/TasksWrapper.styled.tsx";
+import CalendarSectionWrapperStyled from "../../components/CalendarSectionWrapper/CalendarSectionWrapper.styled.tsx";
+import CalendarSidebarWrapperStyled from "../../components/CalendarSidebarWrapper/CalendarSidebarWrapper.styled.tsx";
+import IconWrapperStyled from "../../components/IconWrapper/IconWrapper.styled.tsx";
+import {InfoOutlined} from "@mui/icons-material";
+import FloatingButtonStyled from "../../components/FloatingButton/FloatingButton.styled.tsx";
+import VerticalLogoWrapperStyled from "../../components/VerticalLogoWrapper/VerticalLogoWrapper.styled.tsx";
+import LogoWrapperStyled from "../../components/LogoWrapper/LogoWrapper.styled.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -123,10 +130,26 @@ function TasksPage() {
                     </Card>
                 </ColumnWrapperStyled>
                 <ColumnWrapperStyled>
-                    <FlexOneWrapperStyled><Card isTakingAllHeight={true} headerComponent={
-                        <RightAlignedCardTitleStyled>Calendar</RightAlignedCardTitleStyled>}>
-                        Calendar Content
-                    </Card></FlexOneWrapperStyled>
+                    <FlexOneWrapperStyled>
+                        <CalendarSectionWrapperStyled>
+                            <Card isTakingAllHeight={true} headerComponent={
+                                <RightAlignedCardTitleStyled>Calendar</RightAlignedCardTitleStyled>
+                            }>
+                                Calendar Content
+                            </Card>
+                            <CalendarSidebarWrapperStyled>
+
+                                <FloatingButtonStyled>
+                                    <IconWrapperStyled>
+                                        <InfoOutlined />
+                                    </IconWrapperStyled>
+                                </FloatingButtonStyled>
+                                <VerticalLogoWrapperStyled>
+                                    <p>Achlearnment</p>
+                                </VerticalLogoWrapperStyled>
+                            </CalendarSidebarWrapperStyled>
+                        </CalendarSectionWrapperStyled>
+                    </FlexOneWrapperStyled>
                     <FlexOneWrapperStyled><Card isTakingAllHeight={true} headerComponent={
                         <RightAlignedCardTitleStyled>Shop</RightAlignedCardTitleStyled>}>
                         Shop content
