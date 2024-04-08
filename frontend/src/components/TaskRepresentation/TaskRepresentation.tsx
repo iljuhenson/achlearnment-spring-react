@@ -13,6 +13,7 @@ import TaskActiveSectionStyled from "./TaskActiveSection/TaskActiveSection.style
 import CompleteIconButtonStyled from "./CompleteIconButton/CompleteIconButton.styled.tsx";
 import PayStyled from "./Pay/Pay.styled.tsx";
 import TaskDescriptionStyled from "./TaskDescription/TaskDescription.styled.tsx";
+import TaskMainPartStyled from "./TaskMainPart/TaskMainPart.styled.tsx";
 
 type TaskProps = Task & {expandTask: (taskId : number) => void, selectedTask: number | null};
 
@@ -43,9 +44,11 @@ function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration,
     }
 
     const taskParts = mainTaskPart.replace("%d", duration.toString()).split("%s");
+    const taskDescriptionNoStyling = taskParts[0] + fillTaskPart.toLowerCase() + taskParts[1];
+    const taskWithDots = taskDescriptionNoStyling.slice(0, 25) + "...";
 
     return (
-        <TaskWrapperStyled onClick={() => expandTask(id)} bgColor={backgroundColor}>
+        <TaskWrapperStyled onClick={() => expandTask(id)} bgColor={backgroundColor} isExpanded={selectedTask === id}>
             <IconWrapperStyled>
                 {svgIcon}
             </IconWrapperStyled>
@@ -53,8 +56,8 @@ function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration,
             <TaskActiveSectionStyled>
                 <TaskDescriptionStyled>
                     <h3>{fillTaskPart.toUpperCase()}</h3>
-                    <p>{taskParts[0]}<b>{fillTaskPart.toLowerCase()}</b>{taskParts[1]}</p>
 
+                    {selectedTask === id ? <TaskMainPartStyled>{taskParts[0]}<b>{fillTaskPart.toLowerCase()}</b>{taskParts[1]}</TaskMainPartStyled> : taskWithDots}
                 </TaskDescriptionStyled>
 
 
