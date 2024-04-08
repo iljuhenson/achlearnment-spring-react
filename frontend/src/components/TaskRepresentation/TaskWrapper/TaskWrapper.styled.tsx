@@ -6,6 +6,6 @@ export default styled.div<{bgColor : string, isExpanded: boolean}>`
     background-color: ${({ bgColor }) => bgColor };
     border-radius: 16px;
     overflow: hidden;
-    ${({ isExpanded }) => isExpanded ? "height: auto;" : "height: 52px;" }
-    cursor: pointer;
+    ${({ isExpanded }) => isExpanded ? "height: auto;" : "height: 68px;" }
+    //cursor: pointer;
 `

@@ -48,7 +48,7 @@ function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration,
     const taskWithDots = taskDescriptionNoStyling.slice(0, 25) + "...";
 
     return (
-        <TaskWrapperStyled onClick={() => expandTask(id)} bgColor={backgroundColor} isExpanded={selectedTask === id}>
+        <TaskWrapperStyled  bgColor={backgroundColor} isExpanded={selectedTask === id}>
             <IconWrapperStyled>
                 {svgIcon}
             </IconWrapperStyled>
@@ -61,11 +61,12 @@ function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration,
                 </TaskDescriptionStyled>
 
 
-                    <IconWrapperStyled>
+                    <IconWrapperStyled onClick={() => expandTask(id)} isButton={true}>
                         {selectedTask === id ? <ArrowDropUpOutlined/> : <ArrowDropDownOutlined/>}
                     </IconWrapperStyled>
                     <PayStyled>pay: {pay}</PayStyled>
                     {completed ? "" : <CompleteIconButtonStyled><TaskAltOutlined></TaskAltOutlined></CompleteIconButtonStyled>}
+
             </TaskActiveSectionStyled>
         </TaskWrapperStyled>
     );
