@@ -16,6 +16,7 @@ import {InfoOutlined} from "@mui/icons-material";
 import FloatingButtonStyled from "../../components/FloatingButton/FloatingButton.styled.tsx";
 import VerticalLogoWrapperStyled from "../../components/VerticalLogoWrapper/VerticalLogoWrapper.styled.tsx";
 import LogoWrapperStyled from "../../components/LogoWrapper/LogoWrapper.styled.tsx";
+import CalendarHeader from "../../components/CalendarHeader/CalendarHeader.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -133,7 +134,7 @@ function TasksPage() {
                     <FlexOneWrapperStyled>
                         <CalendarSectionWrapperStyled>
                             <Card isTakingAllHeight={true} headerComponent={
-                                <RightAlignedCardTitleStyled>Calendar</RightAlignedCardTitleStyled>
+                                <CalendarHeader />
                             }>
                                 Calendar Content
                             </Card>

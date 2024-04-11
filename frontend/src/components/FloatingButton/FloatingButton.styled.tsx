@@ -8,4 +8,5 @@ export default styled.div`
     border-radius: 16px;
     box-shadow: 0 12px 40px 4px rgba(112, 144, 176, 0.2);
     overflow: hidden;
+    cursor: pointer;
 `
