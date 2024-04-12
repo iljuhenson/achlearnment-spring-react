@@ -12,8 +12,8 @@ export default styled.button`
     
     svg {
         
-                font-size: ${({ theme }) => theme.sizes.desktop.icon / 1.5 }px;
-        color: ${({ theme }) => theme.colors.text.primary };
+        font-size: ${({ theme }) => theme.sizes.desktop.icon / 1.5 }px;
+        fill: ${({ theme }) => theme.colors.text.secondary };
         font-weight: 400;
         //font-size: ${({ theme }) => theme.sizes.desktop.icon }px;
     }

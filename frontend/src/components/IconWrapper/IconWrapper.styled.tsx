@@ -7,7 +7,7 @@ export default styled.div<{isButton? : boolean}>`
     
     svg {
         font-size: ${({ theme }) => theme.sizes.desktop.icon }px;
-        color: ${({ theme }) => theme.colors.text.primary };
+        fill: ${({ theme }) => theme.colors.text.primary };
         font-weight: 400;
     }
     

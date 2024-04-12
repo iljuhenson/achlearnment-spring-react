@@ -1,42 +1,47 @@
-import React from 'react';
-import IconWrapperStyled from "../IconWrapper/IconWrapper.styled.tsx";
+
 import {ArrowLeft, ArrowRight} from "@mui/icons-material";
 import CalendarButtonsWrapperStyled from "./CalendarButtonsWrapper/CalendarButtonsWrapper.styled.tsx";
 import ArrowButtonStyled from "./ArrowButton/ArrowButton.styled.tsx";
 import CalendarHeaderTopStyled from "./CalendarHeaderTop/CalendarHeaderTop.styled.tsx";
 import CalendarHeaderBottomStyled from "./CalendarHeaderBottom/CalendarHeaderBottom.styled.tsx";
+import WeekDayNameStyled from "./WeekDayName/WeekDayName.styled.tsx";
+import CalendarHeaderTitleStyled from "./CalendarHeaderTitle/CalendarHeaderTitle.styled.tsx";
 
-function CalendarHeader() {
+interface CalendarHeaderProps {
+    selectedMonth: number,
+    selectedYear: number,
+    nextMonth: () => void,
+    prevMonth: () => void,
+}
+
+function CalendarHeader({selectedMonth, selectedYear, nextMonth, prevMonth}: CalendarHeaderProps) {
+    const weekDayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
     return (
     <>
         <CalendarHeaderTopStyled>
             <CalendarButtonsWrapperStyled>
-                <ArrowButtonStyled>
+                <ArrowButtonStyled onClick={prevMonth}>
                     <ArrowLeft />
                 </ArrowButtonStyled>
 
                 <p>
-                    Aug
+                    {monthNames[selectedMonth ]}
                 </p>
                 <p>
-                    2023
+                    {selectedYear}
                 </p>
-                <ArrowButtonStyled>
+                <ArrowButtonStyled onClick={nextMonth}>
                     <ArrowRight />
                 </ArrowButtonStyled>
             </CalendarButtonsWrapperStyled>
             <div>
-                <p>Activity</p>
+                <CalendarHeaderTitleStyled>Activity</CalendarHeaderTitleStyled>
             </div>
         </CalendarHeaderTopStyled>
         <CalendarHeaderBottomStyled>
-            <p>Mon</p>
-            <p>Tue</p>
-            <p>Wed</p>
-            <p>Thu</p>
-            <p>Fri</p>
-            <p>Sat</p>
-            <p>Sun</p>
+            {weekDayNames.map(weekDayName => <WeekDayNameStyled>{weekDayName}</WeekDayNameStyled>)}
         </CalendarHeaderBottomStyled>
     </>
     );

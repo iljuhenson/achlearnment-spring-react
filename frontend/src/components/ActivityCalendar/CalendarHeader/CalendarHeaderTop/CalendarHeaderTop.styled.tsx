@@ -5,4 +5,6 @@ export default styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 12px 16px 0;
+    color: ${({ theme }) => theme.colors.text.secondary };
+    
 `

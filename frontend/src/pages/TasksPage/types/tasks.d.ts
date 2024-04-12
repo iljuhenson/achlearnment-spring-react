@@ -12,7 +12,9 @@ export interface BalanceObject {
     balance: number
 }
 
-export interface Activities extends Array<string> {}
+export interface FetchActivities extends Array<string> {}
+
+export interface Activities extends Array<Date> {}
 
 export interface ShopItem {
     id: number,

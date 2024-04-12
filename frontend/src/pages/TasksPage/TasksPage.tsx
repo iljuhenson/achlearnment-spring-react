@@ -3,7 +3,7 @@ import ColumnWrapperStyled from "../../components/ColumnWrapper/ColumnWrapper.st
 import Card from "../../components/Card/Card.tsx";
 import AppGridStyled from "../../components/AppGrid/AppGrid.styled.tsx";
 import RightAlignedCardTitleStyled from "../../components/RightAlignedCardTitle/RightAlignedCardTitle.styled.tsx";
-import {Activities, BalanceObject, ShopItem, Task} from "./types/tasks";
+import {Activities, BalanceObject, FetchActivities, ShopItem, Task} from "./types/tasks";
 import {useContext, useEffect, useState} from "react";
 import TaskRepresentation from "../../components/TaskRepresentation/TaskRepresentation.tsx";
 import {TokenContext} from "../../context/context.ts";
@@ -16,7 +16,8 @@ import {InfoOutlined} from "@mui/icons-material";
 import FloatingButtonStyled from "../../components/FloatingButton/FloatingButton.styled.tsx";
 import VerticalLogoWrapperStyled from "../../components/VerticalLogoWrapper/VerticalLogoWrapper.styled.tsx";
 import LogoWrapperStyled from "../../components/LogoWrapper/LogoWrapper.styled.tsx";
-import CalendarHeader from "../../components/CalendarHeader/CalendarHeader.tsx";
+import CalendarHeader from "../../components/ActivityCalendar/CalendarHeader/CalendarHeader.tsx";
+import ActivityCalendar from "../../components/ActivityCalendar/ActivityCalendar.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -65,8 +66,10 @@ function TasksPage() {
             },
         });
         if (response.ok) {
-            const jsonResponse: Activities = await response.json();
-            setActivities(jsonResponse);
+
+            const jsonResponse: FetchActivities = await response.json();
+            const activities: Activities = jsonResponse.map(activity => new Date(Date.parse(activity)))
+            setActivities(activities);
         } else if (response.status === 403) {
             updateToken(undefined);
         }
@@ -133,11 +136,7 @@ function TasksPage() {
                 <ColumnWrapperStyled>
                     <FlexOneWrapperStyled>
                         <CalendarSectionWrapperStyled>
-                            <Card isTakingAllHeight={true} headerComponent={
-                                <CalendarHeader />
-                            }>
-                                Calendar Content
-                            </Card>
+                            <ActivityCalendar activities={activities}/>
                             <CalendarSidebarWrapperStyled>
 
                                 <FloatingButtonStyled>
