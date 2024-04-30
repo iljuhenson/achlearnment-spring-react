@@ -18,6 +18,7 @@ import VerticalLogoWrapperStyled from "../../components/VerticalLogoWrapper/Vert
 import LogoWrapperStyled from "../../components/LogoWrapper/LogoWrapper.styled.tsx";
 import CalendarHeader from "../../components/ActivityCalendar/CalendarHeader/CalendarHeader.tsx";
 import ActivityCalendar from "../../components/ActivityCalendar/ActivityCalendar.tsx";
+import Shop from "../../components/Shop/Shop.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -150,10 +151,9 @@ function TasksPage() {
                             </CalendarSidebarWrapperStyled>
                         </CalendarSectionWrapperStyled>
                     </FlexOneWrapperStyled>
-                    <FlexOneWrapperStyled><Card isTakingAllHeight={true} headerComponent={
-                        <RightAlignedCardTitleStyled>Shop</RightAlignedCardTitleStyled>}>
-                        Shop content
-                    </Card></FlexOneWrapperStyled>
+                    <FlexOneWrapperStyled>
+                        <Shop balance={balanceObject.balance} shopItems={shopItems}/>
+                    </FlexOneWrapperStyled>
                 </ColumnWrapperStyled>
             </AppGridStyled>
         </AppBackgroundStyled>

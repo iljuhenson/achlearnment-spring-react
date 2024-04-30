@@ -48,7 +48,7 @@ function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration,
     const taskWithDots = taskDescriptionNoStyling.slice(0, 25) + "...";
 
     return (
-        <TaskWrapperStyled  bgColor={backgroundColor} isExpanded={selectedTask === id}>
+        <TaskWrapperStyled bgColor={backgroundColor} isExpanded={selectedTask === id}>
             <IconWrapperStyled>
                 {svgIcon}
             </IconWrapperStyled>

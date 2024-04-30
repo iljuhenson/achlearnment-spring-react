@@ -7,4 +7,7 @@ export default styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
+    //height: 100%;
+    min-height: 0;
+    //overflow: hidden;
 `

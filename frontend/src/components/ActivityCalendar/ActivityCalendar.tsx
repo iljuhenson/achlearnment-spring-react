@@ -1,4 +1,4 @@
-import React, {ReactElement, useCallback, useMemo, useState} from 'react';
+import React, {ReactElement, useMemo, useState} from 'react';
 import CalendarHeader from "./CalendarHeader/CalendarHeader.tsx";
 import Card from "../Card/Card.tsx";
 import CalendarMain from "./CalendarMain/CalendarMain.tsx";
