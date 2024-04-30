@@ -6,6 +6,7 @@ import BalanceStyled from "./Balance/Balance.styled.tsx";
 import {ShopItem} from "../../pages/TasksPage/types/tasks";
 import ShopItemComponent from "./ShopItem/ShopItem"
 import ShopItemsWrapperStyled from "./ShopItemsWrapper/ShopItemsWrapper.styled.tsx";
+import ShopHeaderNameStyled from "./ShopHeaderName/ShopHeaderName.styled.tsx";
 
 interface ShopProps {
     balance: number,
@@ -16,7 +17,7 @@ function Shop({balance, shopItems}: ShopProps) {
     return (
         <Card isTakingAllHeight={true} headerComponent={<ShopHeaderStyled>
             <BalanceStyled>Balance: {balance}</BalanceStyled>
-            <p>Shop</p>
+            <ShopHeaderNameStyled>Shop</ShopHeaderNameStyled>
         </ShopHeaderStyled>}>
             <ShopItemsWrapperStyled>
                 {shopItems.map(item => <ShopItemComponent key={item.id} {...item} />)}
