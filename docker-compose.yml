@@ -31,7 +31,7 @@ services:
   db:
     build:
       context: backend
-      dockerfile: backend/DBDockefile
+      dockerfile: DBDockefile
     expose:
       - 3306
     ports:

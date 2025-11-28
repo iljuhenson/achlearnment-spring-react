@@ -1,0 +1,33 @@
+{
+  "id": "chatcmpl-8f30bdb2-9957-4606-8c52-23b77f89320a",
+  "object": "chat.completion",
+  "created": 1764280940,
+  "model": "moonshotai/kimi-k2-instruct-0905",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"mistakes_summary\":\"Used \\\"you got to\\\" instead of \\\"you've got to\\\"; informal \\\"man\\\"; repetitive \\\"figure it out\\\"\",\"advice\":\"Replace \\\"you got to\\\" with \\\"you've got to\\\"; swap \\\"man\\\" for a neutral word; vary vocabulary with synonyms like \\\"solve\\\"\",\"is_on_topic\":true}"
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "queue_time": 0.166124307,
+    "prompt_tokens": 236,
+    "prompt_time": 0.031095795,
+    "completion_tokens": 71,
+    "completion_time": 0.42005452,
+    "total_tokens": 307,
+    "total_time": 0.451150315
+  },
+  "usage_breakdown": null,
+  "system_fingerprint": "fp_3312304636",
+  "x_groq": {
+    "id": "req_01kb3nddsne86aq1qk99whz7ze",
+    "seed": 1380703586
+  },
+  "service_tier": "on_demand"
+}

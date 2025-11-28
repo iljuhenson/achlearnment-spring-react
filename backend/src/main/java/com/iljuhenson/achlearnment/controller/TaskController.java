@@ -2,31 +2,34 @@ package com.iljuhenson.achlearnment.controller;
 
 import com.iljuhenson.achlearnment.entity.User;
 import com.iljuhenson.achlearnment.service.DO.ExceptionDO;
+import com.iljuhenson.achlearnment.service.DO.ReviewSpeechResultDO;
 import com.iljuhenson.achlearnment.service.DO.TaskDO;
 import com.iljuhenson.achlearnment.service.TaskService;
+import com.iljuhenson.achlearnment.service.TeacherService;
 import com.iljuhenson.achlearnment.service.exception.ShopItemException;
 import com.iljuhenson.achlearnment.service.exception.TaskException;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api")
 public class TaskController {
-    private TaskService taskService;
 
-    @Autowired
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
+    private TaskService taskService;
+    private TeacherService teacherService;
 
     @GetMapping("/user/tasks")
     @Operation(
@@ -37,14 +40,19 @@ public class TaskController {
         return taskService.findAllUserTasks(user);
     }
 
-    @PutMapping("/user/tasks/{taskId}/complete")
+    @PutMapping(value = "/user/tasks/{taskId}/review", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Operation(
-            description = "Marks user task as completed and increases user balance by the task pay.",
-            summary = "Marks user task as completed"
+            description = "Marks user task as completed increases user balance by the task pay also summarizes mistakes made during the speech",
+            summary = "Reviews and marks user task as completed"
     )
-    public void completeUserTask(@AuthenticationPrincipal User user, @PathVariable int taskId) throws TaskException {
-        taskService.finishUserTaskOfId(user, taskId);
+    public ReviewSpeechResultDO completeUserTask(@AuthenticationPrincipal User user, @PathVariable int taskId, @RequestParam MultipartFile file) throws TaskException {
+        ReviewSpeechResultDO review = teacherService.reviewSpeech(file);
+        if (review.isMarkedAsCompleted()) {
+            taskService.finishUserTaskOfId(user, taskId);
+        }
+
+        return review;
     }
 
     @ExceptionHandler({ TaskException.class })
