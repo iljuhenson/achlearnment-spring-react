@@ -9,7 +9,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 import { TokenContext } from "./context/context.ts";
 import { useEffect, useState } from "react";
-import ModalWindow from "./components/ModalWindow/ModalWindow.tsx";
+import * as NewStyle from "./components/NewStyle/NewStyle.tsx"
+// import ModalWindow from "./components/ModalWindow/ModalWindow.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -55,7 +56,6 @@ function App() {
 				<GlobalStylesStyled />
 				<TokenContext.Provider value={{ token, updateToken }}>
 					<RouterProvider router={router} />
-					{/* <ModalWindow /> */}
 				</TokenContext.Provider>
 			</ThemeProvider>
 		</>

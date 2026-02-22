@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, ReactElement} from 'react';
+import {PropsWithChildren} from 'react';
 import BluredBackgroundStyled from "./BluredBackground/BluredBackground.styled.tsx";
 import ModalWindowCardStyled from "./ModalWindowCard/ModalWindowCard.styled.tsx";
 import ModalWindowHeaderStyled from "./ModalWindowHeader/ModalWindowHeader.styled.tsx";
