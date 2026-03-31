@@ -10,17 +10,18 @@ import ShopHeaderNameStyled from "./ShopHeaderName/ShopHeaderName.styled.tsx";
 
 interface ShopProps {
     balance: number,
-    shopItems: Array<ShopItem>
+    shopItems: Array<ShopItem>,
+    showBuyDialog: (shopItemId: number) => void,
 }
 
-function Shop({balance, shopItems}: ShopProps) {
+function Shop({balance, shopItems, showBuyDialog}: ShopProps) {
     return (
         <Card isTakingAllHeight={true} headerComponent={<ShopHeaderStyled>
             <BalanceStyled>Balance: {balance}</BalanceStyled>
             <ShopHeaderNameStyled>Shop</ShopHeaderNameStyled>
         </ShopHeaderStyled>}>
             <ShopItemsWrapperStyled>
-                {shopItems.map(item => <ShopItemComponent key={item.id} {...item} />)}
+                {shopItems.map(item => <div key={item.id} onClick={() => { !item.bought && showBuyDialog(item.id) } }><ShopItemComponent  {...item} /></div>)}
             </ShopItemsWrapperStyled>
         </Card>
     );

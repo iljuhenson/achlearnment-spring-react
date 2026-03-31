@@ -120,9 +120,9 @@ CREATE TABLE `user_shop_item` (
 -- inserting default data
 
 INSERT INTO task_type (`type`, pay, duration)
-VALUES ('EASY', 5, 5),
-       ('MEDIUM', 10, 10),
-       ('HARD', 20, 20);
+VALUES ('EASY', 10, 1),
+       ('MEDIUM', 20, 2),
+       ('HARD', 30, 3);
 
 INSERT INTO achlearnment.main_task_part
 (`text`)

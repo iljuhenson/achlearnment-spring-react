@@ -15,9 +15,9 @@ import PayStyled from "./Pay/Pay.styled.tsx";
 import TaskDescriptionStyled from "./TaskDescription/TaskDescription.styled.tsx";
 import TaskMainPartStyled from "./TaskMainPart/TaskMainPart.styled.tsx";
 
-type TaskProps = Task & {expandTask: (taskId : number) => void, selectedTask: number | null};
+type TaskProps = Task & {expandTask: (taskId : number) => void, selectedTask: number | null, startCompletingTask: (id: number) => void};
 
-function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration, pay, completed, expandTask, selectedTask}: TaskProps) {
+function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration, pay, completed, expandTask, selectedTask, startCompletingTask}: TaskProps) {
     const theme = useTheme();
     let backgroundColor: string;
     let svgIcon: React.JSX.Element;
@@ -65,7 +65,7 @@ function TaskRepresentation({id, mainTaskPart, fillTaskPart, taskType, duration,
                         {selectedTask === id ? <ArrowDropUpOutlined/> : <ArrowDropDownOutlined/>}
                     </IconWrapperStyled>
                     <PayStyled>pay: {pay}</PayStyled>
-                    {completed ? "" : <CompleteIconButtonStyled><TaskAltOutlined></TaskAltOutlined></CompleteIconButtonStyled>}
+                    {completed ? "" : <CompleteIconButtonStyled onClick={() => startCompletingTask(id)}><TaskAltOutlined></TaskAltOutlined></CompleteIconButtonStyled>}
 
             </TaskActiveSectionStyled>
         </TaskWrapperStyled>

@@ -4,7 +4,7 @@ import Card from "../../components/Card/Card.tsx";
 import AppGridStyled from "../../components/AppGrid/AppGrid.styled.tsx";
 import RightAlignedCardTitleStyled from "../../components/RightAlignedCardTitle/RightAlignedCardTitle.styled.tsx";
 import {Activities, BalanceObject, FetchActivities, ShopItem, Task} from "./types/tasks";
-import {useContext, useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import TaskRepresentation from "../../components/TaskRepresentation/TaskRepresentation.tsx";
 import {TokenContext} from "../../context/context.ts";
 import FlexOneWrapperStyled from "../../components/FlexOneWrapper/FlexOneWrapper.styled.tsx";
@@ -12,13 +12,16 @@ import TasksWrapperStyled from "../../components/TasksWrapper/TasksWrapper.style
 import CalendarSectionWrapperStyled from "../../components/CalendarSectionWrapper/CalendarSectionWrapper.styled.tsx";
 import CalendarSidebarWrapperStyled from "../../components/CalendarSidebarWrapper/CalendarSidebarWrapper.styled.tsx";
 import IconWrapperStyled from "../../components/IconWrapper/IconWrapper.styled.tsx";
-import {InfoOutlined} from "@mui/icons-material";
+import {BookOutlined, InfoOutlined} from "@mui/icons-material";
 import FloatingButtonStyled from "../../components/FloatingButton/FloatingButton.styled.tsx";
 import VerticalLogoWrapperStyled from "../../components/VerticalLogoWrapper/VerticalLogoWrapper.styled.tsx";
 import ActivityCalendar from "../../components/ActivityCalendar/ActivityCalendar.tsx";
 import Shop from "../../components/Shop/Shop.tsx";
 import * as NewStyle from "../../components/NewStyle/NewStyle.tsx";
-import {Button} from "@mui/material";
+// import ModalType from "../../shared/modal-type-enum.ts";
+import {ModalType} from "../../shared/modal-type-enum.ts";
+import RecordingTaskModalContent from "../../components/RecordingTaskModalContent/RecordingTaskModalContent.tsx";
+import BuyItemModalContent from "../../components/BuyItemModalContent/BuyItemModalContent.tsx";
 
 function TasksPage() {
     const {token, updateToken} = useContext(TokenContext);
@@ -29,14 +32,10 @@ function TasksPage() {
 
     const [selectedTask, setSelectedTask] = useState<number | null>(null);
 
-    const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
-    const [bytes, setBytes] = useState<Array<Blob>>([]);
-    const [recording, setRecording] = useState<Blob | null>(null);
-    // const bytes = useRef<Array<Blob>>();
-    // const stream = useRef(navigator
-    //         .mediaDevices
-    //         .getUserMedia({audio: true})
-    // )
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [modalType, setModalType] = useState(ModalType.None);
+    const [displayTask, setDisplayTask] = useState<Task | null>(null);
+    const [displayShopItem, setDisplayShopItem] = useState<ShopItem | null>(null);
 
     const expandTask = (taskId: number) => {
         if(taskId === selectedTask) {
@@ -59,7 +58,7 @@ function TasksPage() {
         });
         if (response.ok) {
             const jsonResponse: Array<Task> = await response.json();
-            setTasks(jsonResponse);
+            setTasks(jsonResponse.sort((a, b) => a.id - b.id));
         } else if (response.status === 403) {
             updateToken(undefined);
         }
@@ -131,34 +130,62 @@ function TasksPage() {
     useEffect(() => {
         populateState();
 
-        navigator
-            .mediaDevices
-            .getUserMedia({audio: true})
-            .then((stream) => {
-                let tempRecorder = new MediaRecorder(stream);
-
-                tempRecorder.ondataavailable = e => {
-                    bytes.push(e.data);
-                    // bytesNow = [...bytes];
-                    setBytes(bytes);
-                    let blob = e.data;
-                }
-
-                tempRecorder.onstop = () => {
-                    let recording = new Blob(bytes, { type: "audio/mp3" })
-                    // recordingNow = Object.assign({}, recording);
-                    setRecording(recording);
-
-                    // setBytes([]);
-                }
-
-                setRecorder(tempRecorder);
-
-            });
+        // navigator
+        //     .mediaDevices
+        //     .getUserMedia({audio: true})
+        //     .then((stream) => {
+        //         let tempRecorder = new MediaRecorder(stream);
+        //
+        //         tempRecorder.ondataavailable = e => {
+        //             bytes.push(e.data);
+        //             // bytesNow = [...bytes];
+        //             setBytes(bytes);
+        //             let blob = e.data;
+        //         }
+        //
+        //         tempRecorder.onstop = () => {
+        //             let recording = new Blob(bytes, { type: "audio/mp3" })
+        //             // recordingNow = Object.assign({}, recording);
+        //             setRecording(recording);
+        //
+        //             // setBytes([]);
+        //         }
+        //
+        //         setRecorder(tempRecorder);
+        //
+        //     });
     }, [token])
 
+    const popupCloseAction = () => {
+        setModalOpen(false);
+        setModalType(ModalType.None);
+        populateState();
+    }
 
+    const startCompletingTask = (id: number) => {
+        let task = tasks.filter(t => t.id === id)[0];
 
+        setDisplayTask(task);
+        setModalType(ModalType.Recording);
+        setModalOpen(true);
+    }
+
+    const showBuyDialog = (shopItemId: number) => {
+        let shopItem = shopItems.filter(i => i.id === shopItemId)[0]
+
+        setDisplayShopItem(shopItem);
+        setModalType(ModalType.BuyItem);
+        setModalOpen(true);
+    }
+
+    const renderBasedOnModalType = () => {
+        switch (modalType) {
+            case ModalType.BuyItem:
+                return <BuyItemModalContent shopItem={displayShopItem || shopItems[0]} />
+            case ModalType.Recording:
+                return <RecordingTaskModalContent task={displayTask || tasks[0]} isModalOpen={isModalOpen}/>
+        }
+    }
     return (
         <AppBackgroundStyled>
             <AppGridStyled>
@@ -166,7 +193,7 @@ function TasksPage() {
                     <Card isTakingAllHeight={true}
                           headerComponent={<RightAlignedCardTitleStyled>Tasks</RightAlignedCardTitleStyled>}>
                         <TasksWrapperStyled>
-                            {tasks.map(task => <TaskRepresentation key={task.id} selectedTask={selectedTask} expandTask={expandTask} {...task}></TaskRepresentation>)}
+                            {tasks.map(task => <TaskRepresentation key={task.id} selectedTask={selectedTask} expandTask={expandTask} startCompletingTask={startCompletingTask} {...task}></TaskRepresentation>)}
                         </TasksWrapperStyled>
                     </Card>
                 </ColumnWrapperStyled>
@@ -178,7 +205,7 @@ function TasksPage() {
 
                                 <FloatingButtonStyled>
                                     <IconWrapperStyled>
-                                        <InfoOutlined />
+                                        <BookOutlined />
                                     </IconWrapperStyled>
                                 </FloatingButtonStyled>
                                 <VerticalLogoWrapperStyled>
@@ -188,33 +215,13 @@ function TasksPage() {
                         </CalendarSectionWrapperStyled>
                     </FlexOneWrapperStyled>
                     <FlexOneWrapperStyled>
-                        <Shop balance={balanceObject.balance} shopItems={shopItems}/>
+                        <Shop balance={balanceObject.balance} showBuyDialog={showBuyDialog} shopItems={shopItems}/>
                     </FlexOneWrapperStyled>
                 </ColumnWrapperStyled>
             </AppGridStyled>
-            <NewStyle.ModalWindow>
-                <Button onClick={() => {
-                    recorder?.start();
-                }} color={"primary"}>Hello</Button>
-                <Button onClick={() => {
-                    recorder?.stop();
-                    console.log(bytes);
-                    console.log(recording);
-                    console.log(window.URL.createObjectURL(recording));
-                    if (recording !== null) {
-                    let fd = new FormData();
-                        fd.append("file", recording, "task_recording.mp3");
-                        const response = fetch(`/api/user/tasks/${tasks[0].id}/review`, {
-                            method: "PUT",
-                            headers: {
-                                "Authorization": token ? token : "",
-                                // "Content-Type": "application/json",
-                            },
-                            body: fd,
-                        });
-                    }
-                }} color={"primary"}>Bye</Button>
-            </NewStyle.ModalWindow>
+            {isModalOpen && <NewStyle.ModalWindow onClose={popupCloseAction} isOpen={isModalOpen}>
+                { renderBasedOnModalType() }
+            </NewStyle.ModalWindow>}
         </AppBackgroundStyled>
     );
 }

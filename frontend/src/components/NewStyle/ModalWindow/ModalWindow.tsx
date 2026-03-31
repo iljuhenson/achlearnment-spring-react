@@ -15,12 +15,16 @@ function ModalWindow({isOpen, onClose, children} :{
 
     return (
         <BackgroundBlur>
-            <NewStyle.AbsoluteCenter>
-                <NewStyle.SizableContainer height={"300px"} width={"500px"}>
+            <NewStyle.AbsoluteCenter onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                    onClose()
+                }
+            }} >
+                <NewStyle.SizableContainer height={"0px"} width={"500px"}>
                     <NewStyle.Row>
                         <NewStyle.ColoredBackground color={theme.colors.card.header}>
                                 <NewStyle.Spacer x={"0"} y={"0"}>
-                                <NewStyle.ColoredBackground color={theme.colors.tasks.hard}>
+                                <NewStyle.ColoredBackground onClick={onClose} color={theme.colors.tasks.hard}>
                                     <NewStyle.AbsoluteCenter>
                                         <NewStyle.Spacer x={"0.5em"} y={"0.2em"}>
                                             <CloseOutlined fontSize={"large"}/>

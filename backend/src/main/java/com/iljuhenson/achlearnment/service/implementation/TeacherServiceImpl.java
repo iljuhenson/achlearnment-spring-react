@@ -36,7 +36,7 @@ public class TeacherServiceImpl implements TeacherService {
         boolean isOnTopic = false;
 
         if (isCompleted) {
-            String reviewMistakesResponse = genAIService.reviewMistakesInTextAsJsonStringResponse(text, "Motivation");
+            String reviewMistakesResponse = genAIService.reviewMistakesInTextAsJsonStringResponse(text, "Get from the speech");
 
             mistakesSummary = jsonUtilsService.extractMistakesSummary(reviewMistakesResponse);
             advice = jsonUtilsService.extractAdvice(reviewMistakesResponse);

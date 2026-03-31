@@ -5,6 +5,7 @@ import AbsoluteCenter from "./AbsoluteCenter/AbsoluteCenter.styled.tsx";
 import SizableContainer from "./SizableContainer/SizableContainer.styled.tsx";
 import Spacer from "./Spacer/Spacer.styled.tsx";
 import ModalWindow from "./ModalWindow/ModalWindow.tsx";
+import Button from "./Button/Button.styled.tsx";
 
 export {
     Column,
@@ -14,4 +15,5 @@ export {
     SizableContainer,
     Spacer,
     ModalWindow,
+    Button,
 }

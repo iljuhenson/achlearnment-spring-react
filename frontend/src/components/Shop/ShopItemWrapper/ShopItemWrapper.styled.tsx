@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default styled.div`
-    background-color: ${({ theme }) => theme.colors.shop.available };
+export default styled.div<{ color?: string }>`
+    background-color: ${(props) => props.color };
     border-radius: 16px;
     
 `

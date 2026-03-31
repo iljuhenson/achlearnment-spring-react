@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default styled.div<{isButton? : boolean}>`
     padding: 16px;
     display: flex;
-    ${({ isButton }) => isButton ? "cursor: pointer;" : ""}
+    cursor: ${({ isButton }) => isButton ? "pointer" : "initial"};
     
     svg {
         font-size: ${({ theme }) => theme.sizes.desktop.icon }px;

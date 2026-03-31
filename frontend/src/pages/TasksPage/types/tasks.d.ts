@@ -23,3 +23,10 @@ export interface ShopItem {
     price: number,
     bought: boolean
 }
+
+export interface ReviewSpeechResult {
+    isMarkedAsCompleted: boolean;
+    isOnTopic: boolean;
+    advice: string;
+    mistakesOverview: string;
+}

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default styled.div<{ width: string, height: string }>`
     display: block;
-    min-height: ${(props) => props.height};
+    min-height: ${(props) => props.height || 0};
     width: ${(props) => props.width};
     overflow: hidden;
     border-radius: 16px;
