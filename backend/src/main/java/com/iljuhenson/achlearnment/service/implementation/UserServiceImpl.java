@@ -45,10 +45,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthenticationResponseDO authenticate(AuthenticationRequestDO request) {
-//        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-//                request.getEmail(),
-//                request.getPassword()
-//        ));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                request.getEmail(),
+                request.getPassword()
+        ));
 
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         String token = jwtService.generateToken(user);
